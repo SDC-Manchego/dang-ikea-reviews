@@ -28,6 +28,8 @@ app.get('/api-product-data', (req, res) => {
   })
 })
 
-app.listen(port, () => {
-  console.log(`Review server listening on port $(port), ${new Date()}`);
-});
+// app.listen(port, () => {
+//   console.log(`Review server listening on port ${port}, ${new Date()}`);
+// });
+
+module.exports.app = app;
