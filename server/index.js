@@ -13,8 +13,8 @@ app.get('/', function (req, res) {
 });
 
 app.get('/api-reviews', (req, res) => {
-  console.log("received request: ", req.body);
-  db.getReviewsByProductId(req.body, (err, results) => {
+  console.log("received request: ", req.query);
+  db.getReviewsByProductId(req.query, (err, results) => {
     if (err) {
       console.log(err);
     } else {
