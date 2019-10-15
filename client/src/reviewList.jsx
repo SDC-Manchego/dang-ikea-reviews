@@ -4,8 +4,11 @@ class SingleReview extends React.Component {
 
   }
 
-  showDate(unixTime) {
-    var days = (new Date(unixTime)) / 8640000000;
+  showDate(mysqlTime) {
+    var year = Number(mysqlTime.substring(0,4));
+    var month = Number(mysqlTime.substring(5,7)) - 1;
+    var day = Number(mysqlTime.substring(8,10));
+    var days = (new Date() - new Date(year, month, day)) / 86400000;
     if (days < 2) {
       return 'today';
     } else if (days < 14 ) {
@@ -17,7 +20,7 @@ class SingleReview extends React.Component {
     } else if (days < 730) {
       return 'one year ago';
     } else {
-      return Math.ceil(days / 365).toString() + ' years ago';
+      return Math.floor(days / 365).toString() + ' years ago';
     }
   }
 
@@ -58,7 +61,10 @@ class SingleReview extends React.Component {
               </div>
               <div>{this.props.review.title}</div>
               <p>{this.props.review.text}</p>
-              <div>{this.showRecommendation(this.props.review.recommended)}</div>
+              <p>{this.showRecommendation(this.props.review.recommended)}</p>
+              <div>Helpful?
+                <button>Yes - {this.props.review.helpful_count}</button>
+                <button>No - {this.props.review.not_helpful_count}</button><button>Report</button></div>
               </td>
               <td>
                 <div>
@@ -91,12 +97,14 @@ class ReviewList extends React.Component {
 
   render(
     reviewList = this.props.reviews.map(
-      review => <div key={review.id}><SingleReview review={review}/></div>
+      review => <div key={review.id}><SingleReview review={review}/>
+      </div>
     )
   ) {
     return(
       <div>
       {reviewList}
+      <div><button className="reviewsLastPage">&#9664;</button><button className="reviewsNextPage">&#9658;</button></div>
       </div>
     )
   }

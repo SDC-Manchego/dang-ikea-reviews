@@ -5,7 +5,7 @@ describe('Testing MYSQL response from server', () => {
   test('Sends a get request for reviews for product', function(done) {
     request(app)
       .get('/api-reviews')
-      .send({"product_id":"922.603.34"})
+      .query({"product_id":"922.603.34"})
       .set('Accept','application/json')
       .expect(200)
       .expect(function(res) {
