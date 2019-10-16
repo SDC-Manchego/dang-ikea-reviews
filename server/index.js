@@ -24,7 +24,7 @@ app.get('/api-reviews', (req, res) => {
 });
 
 app.get('/api-product-data', (req, res) => {
-  db.getProductDataById(req.body, (err, results) => {
+  db.getProductDataById(req.query, (err, results) => {
     if (err) {
       console.log(err);
     } else {
@@ -32,6 +32,18 @@ app.get('/api-product-data', (req, res) => {
     }
   })
 })
+
+app.post('/api-increment', (req, res) => {
+    db.incrementReviewCounts(req.query, (err, results) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.end(JSON.stringify(results));
+      }
+    })
+  }
+)
+
 
 app.listen(port, () => {
   console.log(`Review server listening on port ${port}, ${new Date()}`);
