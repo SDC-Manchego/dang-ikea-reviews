@@ -1,7 +1,29 @@
 class SingleReview extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
+  handleClick(e) {
+    if (e.target.className.indexOf('reviewHelpfulYes') == -1) {
+      var reviewId = e.target.className.slice(16);
+      var action = e.target.className.slice(0,16);
+      if (this.props.helpfulClicks.indexOf(reviewId) == -1) {
+        this.props.reviewAction(reviewId, action)
+      }
+    } else if (e.target.className.indexOf('reviewHelpfulNo') == -1) {
+      var reviewId = e.target.className.slice(15);
+      var action = e.target.className.slice(0,15);
+      if (this.props.helpfulClicks.indexOf(reviewId) == -1) {
+        this.props.reviewAction(reviewId, action)
+      }
+    } else if (e.target.className.indexOf('reviewReport') == -1) {
+      var reviewId = e.target.className.slice(12);
+      var action = e.target.className.slice(0,12);
+      if (this.props.reported.indexOf(reviewId) == -1) {
+        this.props.reviewAction(reviewId, action)
+      }
+    }
   }
 
   showDate(mysqlTime) {
@@ -63,8 +85,9 @@ class SingleReview extends React.Component {
               <p>{this.props.review.text}</p>
               <p>{this.showRecommendation(this.props.review.recommended)}</p>
               <div>Helpful?
-                <button>Yes - {this.props.review.helpful_count}</button>
-                <button>No - {this.props.review.not_helpful_count}</button><button>Report</button></div>
+                <button className={"reviewHelpfulYes" + this.props.review.id} onClick={this.clickHandler}>Yes - {this.props.review.helpful_count}</button>
+                <button className={"reviewHelpfulNo" + this.props.review.id} onClick={this.clickHandler}>No - {this.props.review.not_helpful_count}</button>
+                <button className={"reviewReport" + this.props.review.id} onClick={this.clickHandler}>Report</button></div>
               </td>
               <td>
                 <div>
@@ -111,7 +134,7 @@ recordSelection() {
     reviewList = this.props.reviews
       .slice(...this.recordSelection())
       .filter(review => this.props.filter.length > 0 ? this.props.filter[0] == review.overall_rating : -1 )
-      .map(review => <div key={review.id}><SingleReview review={review}/>
+      .map(review => <div key={review.id}><SingleReview review={review} reported={this.props.reported} helpfulClicks={this.props.helpfulClicks}/>
       </div>
     )
   ) {
