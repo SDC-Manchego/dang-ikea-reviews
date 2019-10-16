@@ -13,7 +13,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/api-reviews', (req, res) => {
-  console.log("received request: ", req.query);
+  //console.log("received request: ", req.query);
   db.getReviewsByProductId(req.query, (err, results) => {
     if (err) {
       console.log(err);
@@ -34,7 +34,7 @@ app.get('/api-product-data', (req, res) => {
 })
 
 app.post('/api-increment', (req, res) => {
-    db.incrementReviewCounts(req.query, (err, results) => {
+    db.incrementReviewCounts(req.body, (err, results) => {
       if (err) {
         console.log(err);
       } else {

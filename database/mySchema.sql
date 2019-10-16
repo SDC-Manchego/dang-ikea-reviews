@@ -16,9 +16,9 @@ appearance_rating	TINYINT,
 ease_of_assembly_rating 	TINYINT,
 works_as_expected_rating	TINYINT,
 recommended		BOOLEAN,
-helpful_count	INT,
-not_helpful_count	INT,
-reported_count	INT,
+helpful_count	INT DEFAULT 0,
+not_helpful_count	INT DEFAULT 0,
+reported_count	INT DEFAULT 0,
 PRIMARY KEY(id)
 );
 
