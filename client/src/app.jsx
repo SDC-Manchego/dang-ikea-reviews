@@ -1,7 +1,8 @@
 import ReviewList from './reviewList.jsx'
 import SnapShot from './snapShot.jsx'
+import Averages from './average.jsx'
 
-class App extends React.Component {
+class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,8 +13,10 @@ class App extends React.Component {
       selectedStars: []
     };
     this.changeFilter = this.changeFilter.bind(this);
+    this.reviewAction = this.reviewAction.bind(this);
   }
 
+  //change filtering of review list based on selected star overall rating in review Summary
   changeFilter(classname) {
     var value = classname.slice(0,1);
     var change = classname.slice(1);
@@ -32,6 +35,31 @@ class App extends React.Component {
       console.log(this.state.selectedStars);})
     }
   }
+
+  reviewAction(id, action){
+    if (action === "reported_count") {
+      var listA = this.state.reportedReviews;
+      listA.push(id);
+      var listB = this.state.helpfulClicks;
+    } else {
+      var listA = this.state.reportedReviews;
+      var listB = this.state.helpfulClicks;
+      listB.push(id);
+    }
+    $.ajax({
+      type: "POST",
+      datatype: 'json',
+      contentType: 'application/json',
+      url: `/api-increment`,
+      data: JSON.stringify({ column: action, id: id }),
+      success: this.setState({
+        reportedReviews: listA,
+        helpfulClicks: listB
+      },
+      this.getReviewsByProductId(this.urlProductId()))
+    })
+  }
+
 
   urlProductId() {
     var questMarkLocation = (window.location.href).indexOf('?');
@@ -63,12 +91,12 @@ class App extends React.Component {
                 <SnapShot reviews={this.state.reviewsArray} filter={this.state.selectedStars} changeFilter={this.changeFilter} />
               </td>
               <td className="reviewAverage">
-                Review Average Ratings Go Here
+              <Averages reviews={this.state.reviewsArray} />
               </td>
             </tr>
             <tr>
               <td className="reviewList">
-                <ReviewList reviews={this.state.reviewsArray} page={this.state.currentPage} helpfulClicks={this.state.helpfulClicks} reported={this.state.reportedReviews}  filter={this.state.selectedStars} />
+                <ReviewList reviews={this.state.reviewsArray} page={this.state.currentPage} helpfulClicks={this.state.helpfulClicks} reported={this.state.reportedReviews}  filter={this.state.selectedStars} reviewAction={this.reviewAction}/>
               </td>
             </tr>
           </tbody>

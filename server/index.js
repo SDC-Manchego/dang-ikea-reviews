@@ -34,6 +34,7 @@ app.get('/api-product-data', (req, res) => {
 })
 
 app.post('/api-increment', (req, res) => {
+    console.log(req.body);
     db.incrementReviewCounts(req.body, (err, results) => {
       if (err) {
         console.log(err);
