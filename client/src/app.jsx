@@ -78,19 +78,23 @@ class App extends React.PureComponent {
   render() {
     return(
       <div>
-        Reviews
-        <table>
+        <h5>Reviews</h5>
+        <table width="100%">
           <tbody>
             <tr>
-              <td className="reviewSnapShot">
+              <td className="reviewSnapShot" width="50%">
                 <SnapShot reviews={this.state.reviewsArray} filter={this.state.selectedStars} changeFilter={this.changeFilter} />
               </td>
-              <td className="reviewAverage">
+              <td className="reviewAverageSummary" width="50%">
               <Averages reviews={this.state.reviewsArray} />
               </td>
             </tr>
+          </tbody>
+        </table>
+        <table width="100%">
+          <tbody>
             <tr>
-              <td className="reviewList">
+              <td className="reviewList" width="100%">
                 <ReviewList reviews={this.state.reviewsArray} page={this.state.currentPage} helpfulClicks={this.state.helpfulClicks} filter={this.state.selectedStars} reviewAction={this.reviewAction}/>
               </td>
             </tr>

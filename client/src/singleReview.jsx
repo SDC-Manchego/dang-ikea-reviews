@@ -85,13 +85,13 @@ class SingleReview extends React.PureComponent {
         <table>
           <tbody>
             <tr>
-             <td>
+             <td className="reviewSingleMain">
               <div>
                 <span dangerouslySetInnerHTML={{__html: this.showStars(this.props.review.overall_rating)}}/>
-                <span> {this.props.review.author} </span>
-                <span>{this.showDate(this.props.review.date)}</span>
+                <span> {this.props.review.author} </span><span> · </span>
+                <span className="reviewDate">{this.showDate(this.props.review.date)}</span>
               </div>
-              <div>{this.props.review.title}</div>
+              <div className="reviewTitle">{this.props.review.title}</div>
               <p>{this.props.review.text}</p>
               <p>{this.showRecommendation(this.props.review.recommended)}</p>
               <div>Helpful?
@@ -99,7 +99,7 @@ class SingleReview extends React.PureComponent {
                 <button key={this.props.review.id + "n"} className={"reviewHelpfulNo" + this.props.review.id} onClick={this.clickHandler}>No - {this.props.review.not_helpful_count}</button>
                 <button key={this.props.review.id + "r"} className={"reviewReport" + this.props.review.id} onClick={this.clickHandler}>{this.state.reported}</button></div>
               </td>
-              <td>
+              <td className="reviewSingleRatings">
                 <div>
                   <div>Value for money</div>
                   <span className="reviewStars" dangerouslySetInnerHTML={{__html: this.showStars(this.props.review.value_rating)}}/>
