@@ -1,6 +1,6 @@
 {
   "name": "piccolo-ikea-reviews",
-  "version": "",
+  "version": "1.0.0",
   "description": "",
   "author": "Daryl Marco",
   "license": "",
@@ -12,7 +12,7 @@
     "seed": "node database/databaseSeeder",
     "build:dev": "webpack -d --watch",
     "start": "nodemon /server/index.js",
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "dependencies": {
     "@babel/core": "^7.6.3",

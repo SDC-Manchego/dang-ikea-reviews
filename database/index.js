@@ -22,7 +22,6 @@ var getReviewsByProductId = function(req, callback) {
     if (error) {
       console.log(error);
     }
-    console.log('mysql results: ', results);
     callback(null, results);
   })
 }
