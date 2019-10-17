@@ -2,6 +2,9 @@ class SingleReview extends React.PureComponent {
   constructor(props) {
     super(props);
     this.clickHandler = this.clickHandler.bind(this);
+    this.state = {
+      reported: "Report"
+    }
   }
 
   clickHandler(e) {
@@ -21,9 +24,12 @@ class SingleReview extends React.PureComponent {
     } else if (e.target.className.indexOf('reviewReport') > -1) {
       var reviewId = e.target.className.slice(12);
       var action = 'reported_count';
-      if (this.props.reported.indexOf(reviewId) == -1) {
-        this.props.reviewAction(reviewId, action)
-        this.ReportButton();
+      if (this.state.reported == "Report") {
+        this.props.reviewAction(reviewId, action);
+        this.setState({
+          reported: "Reported"
+        })
+
       }
     }
   }
@@ -70,23 +76,8 @@ class SingleReview extends React.PureComponent {
     return result;
   }
 
-  ReportButton() {
-    if (this.props.reported.indexOf(this.props.review.id) == -1) {
-      return "Report";
-    } else {
-      return "Reported";
-    }
-  }
-
   render(
   ) {
-      // var ReportButton
-      // if (this.props.reported.indexOf(this.props.review.id) == -1) {
-      //   ReportButton = "Report"
-      // } else {
-      //   ReportButton = "Reported"
-      // }
-
     return(
       <div>
         <table>
@@ -104,7 +95,7 @@ class SingleReview extends React.PureComponent {
               <div>Helpful?
                 <button key={this.props.review.id + "y"} className={"reviewHelpfulYes" + this.props.review.id} onClick={this.clickHandler}>Yes - {this.props.review.helpful_count}</button>
                 <button key={this.props.review.id + "n"} className={"reviewHelpfulNo" + this.props.review.id} onClick={this.clickHandler}>No - {this.props.review.not_helpful_count}</button>
-                <button key={this.props.review.id + "r"} className={"reviewReport" + this.props.review.id} onClick={this.clickHandler}>{this.ReportButton()}</button></div>
+                <button key={this.props.review.id + "r"} className={"reviewReport" + this.props.review.id} onClick={this.clickHandler}>{this.state.reported}</button></div>
               </td>
               <td>
                 <div>
@@ -129,12 +120,9 @@ class SingleReview extends React.PureComponent {
 
 }
 
-
-
 class ReviewList extends React.PureComponent {
   constructor(props) {
     super(props);
-
   }
 
 recordSelection() {
@@ -151,7 +139,7 @@ recordSelection() {
     reviewList = this.props.reviews
       .slice(...this.recordSelection())
       .filter(review => this.props.filter.length > 0 ? this.props.filter[0] == review.overall_rating : -1 )
-      .map(review => <div key={review.id}><SingleReview review={review} reported={this.props.reported} helpfulClicks={this.props.helpfulClicks} reviewAction={this.props.reviewAction}/>
+      .map(review => <div key={review.id}><SingleReview review={review} helpfulClicks={this.props.helpfulClicks} reviewAction={this.props.reviewAction}/>
       </div>
     )
   ) {

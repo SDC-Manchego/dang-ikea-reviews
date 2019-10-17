@@ -8,7 +8,6 @@ class App extends React.PureComponent {
     this.state = {
       reviewsArray: [],
       helpfulClicks:[],
-      reportedReviews: [],
       currentPage: 1,
       selectedStars: []
     };
@@ -37,14 +36,11 @@ class App extends React.PureComponent {
   }
 
   reviewAction(id, action){
-    if (action === "reported_count") {
-      var listA = this.state.reportedReviews;
-      listA.push(id);
-      var listB = this.state.helpfulClicks;
+    if (action !== "reported_count") {
+      var list = this.state.helpfulClicks;
+      list.push(id);
     } else {
-      var listA = this.state.reportedReviews;
-      var listB = this.state.helpfulClicks;
-      listB.push(id);
+      var list = this.state.helpfulClicks;
     }
     $.ajax({
       type: "POST",
@@ -53,8 +49,7 @@ class App extends React.PureComponent {
       url: `/api-increment`,
       data: JSON.stringify({ column: action, id: id }),
       success: this.setState({
-        reportedReviews: listA,
-        helpfulClicks: listB
+        helpfulClicks: list
       },
       this.getReviewsByProductId(this.urlProductId()))
     })
@@ -96,7 +91,7 @@ class App extends React.PureComponent {
             </tr>
             <tr>
               <td className="reviewList">
-                <ReviewList reviews={this.state.reviewsArray} page={this.state.currentPage} helpfulClicks={this.state.helpfulClicks} reported={this.state.reportedReviews}  filter={this.state.selectedStars} reviewAction={this.reviewAction}/>
+                <ReviewList reviews={this.state.reviewsArray} page={this.state.currentPage} helpfulClicks={this.state.helpfulClicks} filter={this.state.selectedStars} reviewAction={this.reviewAction}/>
               </td>
             </tr>
           </tbody>
