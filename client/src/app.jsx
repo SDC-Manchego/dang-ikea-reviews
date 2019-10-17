@@ -94,7 +94,9 @@ class App extends React.PureComponent {
         <table width="100%">
           <tbody>
             <tr>
+
               <td className="reviewList" width="100%">
+
                 <ReviewList reviews={this.state.reviewsArray} page={this.state.currentPage} helpfulClicks={this.state.helpfulClicks} filter={this.state.selectedStars} reviewAction={this.reviewAction}/>
               </td>
             </tr>
