@@ -1,3 +1,5 @@
+import React from 'react'
+
 class Averages extends React.PureComponent {
   constructor(props) {
     super(props);

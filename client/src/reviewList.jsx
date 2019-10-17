@@ -1,3 +1,5 @@
+import React from 'react'
+
 class SingleReview extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -152,4 +154,4 @@ recordSelection() {
   }
 }
 
-export default ReviewList
+export default {ReviewList, SingleReview}
