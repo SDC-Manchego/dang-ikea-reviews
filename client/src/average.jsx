@@ -38,47 +38,110 @@ class Averages extends React.PureComponent {
   render (
   )
   { var Averages = this.getAverages(this.props.reviews);
-    const AverageTD = styled.td`
-      height: 4px;
-      width: 29;
-      border-collapse:
-      collapse;
-      border: 0.5px solid rgb(175, 175, 175);
-      opacity:0;
-    `
-    const AverageTable = styled.table.attrs(props => ({
-      bgcolor: "linear-gradient(90deg, #fc0 " + Averages.value_rating.avg()*20 + "%, white" + 100 - Averages.overall_rating.avg()*20 + "%)"
-      }))`
-        margin-top: 2px;
-        margin-bottom: 2px;
-        height: 4px;
-        width: 145px;
-        border-collapse:
-        collapse;
-        border: 0.5px solid rgb(175, 175, 175)
-        background-image: linear-gradient(90deg, #fc0 33%, white 33%);
-    `
-    return (
-      <div key={this.props.reviews}>
-        <AverageTable><tbody><tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        </tr></tbody></AverageTable>
-        <p>Average Customer Ratings</p>
-        <div className="reviewAverageOverall">
-          <span>Overall</span><span> -= {Averages.overall_rating.avg().toFixed(1)} =- </span><span> {Averages.overall_rating.avg().toFixed(1)} </span></div>
-        <div className="reviewAverageValue">
-          <span>Value for money</span><span> -= {Averages.value_rating.avg().toFixed(1)} =- </span><span> {Averages.value_rating.avg().toFixed(1)} </span></div>
-        <div className="reviewAverageQuality">
-          <span>Product quality </span><span> -= {Averages.quality_rating.avg().toFixed(1)} =- </span><span> {Averages.quality_rating.avg().toFixed(1)} </span></div>
-        <div className="reviewAverageAppearance">
-          <span>Appearance </span><span> -= {Averages.appearance_rating.avg().toFixed(1)} =- </span><span> {Averages.appearance_rating.avg().toFixed(1)} </span></div>
-        <div className="reviewAverageWorks"><
-          span>Works as expected</span><span> -= {Averages.works_as_expected_rating.avg().toFixed(1)} =- </span><span> {Averages.works_as_expected_rating.avg().toFixed(1)} </span></div>
 
+    const AverageOverallDiv = styled.div.attrs(props => ({
+      bgcolor: "linear-gradient(90deg, #fc0 " + (Averages.overall_rating.avg()*20).toString() + "%, white " + (100 - Averages.overall_rating.avg()*20).toString() + "%)"
+      }))`
+        display: inline-block;
+        width: 145px;
+        background: ${props => props.bgcolor};
+    `
+       const AverageValDiv = styled.div.attrs(props => ({
+      bgcolor: "linear-gradient(90deg, #fc0 " + (Averages.value_rating.avg()*20).toString() + "%, white " + (100 - Averages.value_rating.avg()*20).toString() + "%)"
+      }))`
+        display: inline-block;
+        width: 145px;
+        background: ${props => props.bgcolor};
+    `
+    const AverageQualDiv = styled.div.attrs(props => ({
+      bgcolor: "linear-gradient(90deg, #fc0 " + (Averages.quality_rating.avg()*20).toString() + "%, white " + (100 - Averages.quality_rating.avg()*20).toString() + "%)"
+      }))`
+        display: inline-block;
+        width: 145px;
+        background: ${props => props.bgcolor};
+    `
+    const AverageAppDiv = styled.div.attrs(props => ({
+      bgcolor: "linear-gradient(90deg, #fc0 " + (Averages.appearance_rating.avg()*20).toString() + "%, white " + (100 - Averages.appearance_rating.avg()*20).toString() + "%)"
+      }))`
+        display: inline-block;
+        width: 145px;
+        background: ${props => props.bgcolor};
+    `
+    const AverageWorksDiv = styled.div.attrs(props => ({
+      bgcolor: "linear-gradient(90deg, #fc0 " + (Averages.works_as_expected_rating.avg()*20).toString() + "%, white " + (100 - Averages.works_as_expected_rating.avg()*20).toString() + "%)"
+      }))`
+        display: inline-block;
+        width: 145px;
+        background: ${props => props.bgcolor};
+    `
+
+    return (
+      <div>
+        <p>Average Customer Ratings</p>
+        <table className="reviewAverageStats">
+          <tbody>
+            <tr>
+              <td>Overall</td>
+              <td><AverageOverallDiv></AverageOverallDiv></td>
+              <td>{Averages.overall_rating.avg().toFixed(1)}</td>
+            </tr>
+            <tr>
+              <td>Value for money</td>
+              <td><AverageValDiv><table className="reviewAverageBars">
+                <tbody><tr>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                </tr></tbody></table></AverageValDiv>
+              </td>
+              <td>{Averages.value_rating.avg().toFixed(1)}</td>
+            </tr>
+            <tr>
+              <td>Product quality</td>
+              <td>
+              <AverageQualDiv><table className="reviewAverageBars">
+                <tbody><tr>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                </tr></tbody></table></AverageQualDiv>
+              </td>
+              <td>{Averages.quality_rating.avg().toFixed(1)}</td>
+            </tr>
+            <tr>
+              <td>Product quality</td>
+              <td>
+              <AverageAppDiv><table className="reviewAverageBars">
+                <tbody><tr>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                </tr></tbody></table></AverageAppDiv>
+              </td>
+              <td>{Averages.appearance_rating.avg().toFixed(1)}</td>
+            </tr>
+            <tr>
+              <td>Works as expected</td>
+              <td>
+                <AverageWorksDiv><table className="reviewAverageBars">
+                  <tbody><tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                  </tr></tbody></table></AverageWorksDiv>
+              </td>
+              <td>{Averages.works_as_expected_rating.avg().toFixed(1)}</td>
+            </tr>
+          </tbody>
+         </table>
       </div>
     )
   }
