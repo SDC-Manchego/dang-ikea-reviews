@@ -1,6 +1,7 @@
 import ReviewList from './reviewList.jsx'
 import SnapShot from './snapShot.jsx'
 import Averages from './average.jsx'
+import Rotate from './sectionBox.jsx'
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -9,12 +10,22 @@ class App extends React.PureComponent {
       reviewsArray: [],
       helpfulClicks:[],
       currentPage: 1,
-      selectedStars: []
+      selectedStars: [],
+      isOpen: true,
+      isStarted: false
     };
     this.changeFilter = this.changeFilter.bind(this);
     this.reviewAction = this.reviewAction.bind(this);
+    this.toggleOpen = this.toggleOpen.bind(this);
+        this.toggleOpen = this.toggleOpen.bind(this);
   }
 
+  toggleOpen() {
+    this.setState({
+      isStarted: true,
+      isOpen: !this.state.isOpen
+    })
+  }
   //change filtering of review list based on selected star overall rating in review Summary
   changeFilter(classname) {
     var value = classname.slice(0,1);
@@ -78,7 +89,7 @@ class App extends React.PureComponent {
   render() {
     return(
       <div>
-        <h5>Reviews</h5>
+        <h5><Rotate isOpen={this.state.isOpen} isStarted={this.state.isStarted} onClick={this.toggleOpen}>+</Rotate> Reviews</h5>
         <table width="100%">
           <tbody>
             <tr>
