@@ -29,7 +29,7 @@ const rotateNot = keyframes`
 
 const Rotate = styled.div`
   display: inline-block;
-  animation: ${props => props.isStarted ? (props.isOpen ? rotateRight : rotateLeft) : rotateNot } 1s;
+  animation: ${props => props.isStarted ? (props.isOpen ? rotateLeft : rotateRight) : rotateNot } 1s;
   font-size: 1.2rem;
   animation-fill-mode: forwards;
   animation-direction: alternate;
