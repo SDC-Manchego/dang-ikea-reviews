@@ -42,19 +42,19 @@ class Averages extends React.PureComponent {
       display: inline-block;
       background-color: white;
       color: black;
-      font-size: 16px;
+      font-size: 16.2px;
       font-weight: bold;
       text-align: left;
       mix-blend-mode: screen;
     `
 
     const AverageOverallDiv = styled.div.attrs(props => ({
-      bgcolor: "linear-gradient(90deg, #fc0 " + (Averages.overall_rating.avg()*20).toString() + "%, rgb(175, 175, 175) " + (100 - Averages.overall_rating.avg()*20).toString() + "%)"
+      bgcolor: "linear-gradient(90deg, #fc0 " + (Averages.overall_rating.avg()*20).toString() + "%, rgb(230, 230, 230) " + (Averages.overall_rating.avg()*20).toString() + "%)"
       }))`
         display: inline-block;
         height: 20px
-        width: 78px;
-        max-width: 78px;
+        width: 81px;
+        max-width: 81px;
         background: ${props => props.bgcolor};
     `
        const AverageValDiv = styled.div.attrs(props => ({
