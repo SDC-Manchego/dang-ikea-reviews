@@ -68,6 +68,7 @@ class SingleReview extends React.PureComponent {
 
   showStars(count) {
     var result = '';
+
     for (var i = 0; i < count; i++) {
         result += '&#9733';
     }
@@ -77,9 +78,11 @@ class SingleReview extends React.PureComponent {
     var result = '';
     for (var i = 0; i < 5 - count; i++) {
         result += '&#9733';
+
     }
     return result;
   }
+
 
   isGoldBar(number, rating) {
     if (number <= Number(rating)) {

@@ -56,6 +56,7 @@ class App extends React.PureComponent {
         <FadeInDiv>
         {this.state.isStarted ? (this.state.isOpen ? <ReviewParent /> : "") : "" }
     </FadeInDiv></ReviewParentDiv>
+
       </div>
     )
   }
