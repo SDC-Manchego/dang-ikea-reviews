@@ -2,6 +2,7 @@ import ReviewList from './reviewList.jsx'
 import SnapShot from './snapShot.jsx'
 import Averages from './average.jsx'
 import Rotate from './sectionBox.jsx'
+import styled, {keyframes} from 'styled-components'
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -87,10 +88,41 @@ class App extends React.PureComponent {
   }
 
   render() {
+    const ReviewParentDiv = styled.div`
+      display: block;
+      width: 100%;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      :hover {
+        background-color: ${props => this.state.isOpen ? "white" : "rgb(230, 240, 255)"};
+      }`;
+      const fadeIn = keyframes`
+      from {
+        transform: translate(0px,-50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translate(0px, 0px);
+        opacity: 1;
+      }
+    `;
+
+      const FadeInDiv = styled.div`
+      animation: ${props => this.state.isStarted ? (this.state.isOpen ? "" : fadeIn) : "" } 1s;
+      width: 90%
+      animation-fill-mode: forwards;
+      animation-direction: alternate;
+    `;
+
+
     return(
       <div>
+        <ReviewParentDiv>
         <h5><Rotate isOpen={this.state.isOpen} isStarted={this.state.isStarted} onClick={this.toggleOpen}>+</Rotate> Reviews</h5>
+        <FadeInDiv>
         <table width="100%">
+          <thead ><tr><td>Reviews</td></tr></thead>
           <tbody>
             <tr>
               <td className="reviewSnapShot" width="50%">
@@ -111,6 +143,7 @@ class App extends React.PureComponent {
             </tr>
           </tbody>
         </table>
+        </FadeInDiv></ReviewParentDiv>
       </div>
     )
   }
