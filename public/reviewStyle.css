@@ -306,6 +306,14 @@ button {
   opacity: 0.33
 }
 
+.reviewPercentBars {
+  height: 10px;
+  width: 175px;
+  border-collapse:
+  collapse;
+  border: 0.5px solid rgb(175, 175, 175)
+}
+
 .reviewRatingBars {
   margin-top: 2px;
   margin-bottom: 2px;
