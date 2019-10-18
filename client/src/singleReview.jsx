@@ -68,30 +68,44 @@ class SingleReview extends React.PureComponent {
 
   showStars(count) {
     var result = '';
-    for (var i = 1; i <=5; i++) {
-      if (i <= count) {
+
+    for (var i = 0; i < count; i++) {
         result += '&#9733';
-      } else {
-        result += '&#9734';
-      }
+    }
+    return result;
+  }
+  showNoStars(count) {
+    var result = '';
+    for (var i = 0; i < 5 - count; i++) {
+        result += '&#9733';
+
     }
     return result;
   }
 
+
+  isGoldBar(number, rating) {
+    if (number <= Number(rating)) {
+      return "reviewBarGold";
+    }
+    return "reviewNoGold"
+  }
+
   render(
   ) {
+    const review = this.props.review;
     return(
       <div>
         <table>
           <tbody>
             <tr>
-             <td>
+             <td className="reviewSingleMain">
               <div>
-                <span dangerouslySetInnerHTML={{__html: this.showStars(this.props.review.overall_rating)}}/>
-                <span> {this.props.review.author} </span>
-                <span>{this.showDate(this.props.review.date)}</span>
+                <span className="reviewGoldStars" dangerouslySetInnerHTML={{__html: this.showStars(this.props.review.overall_rating)}}/><span className="reviewGreyStars" dangerouslySetInnerHTML={{__html: this.showNoStars(this.props.review.overall_rating)}}/>
+                <span> {this.props.review.author} </span><span> · </span>
+                <span className="reviewDate">{this.showDate(this.props.review.date)}</span>
               </div>
-              <div>{this.props.review.title}</div>
+              <div className="reviewTitle">{this.props.review.title}</div>
               <p>{this.props.review.text}</p>
               <p>{this.showRecommendation(this.props.review.recommended)}</p>
               <div>Helpful?
@@ -99,18 +113,36 @@ class SingleReview extends React.PureComponent {
                 <button key={this.props.review.id + "n"} className={"reviewHelpfulNo" + this.props.review.id} onClick={this.clickHandler}>No - {this.props.review.not_helpful_count}</button>
                 <button key={this.props.review.id + "r"} className={"reviewReport" + this.props.review.id} onClick={this.clickHandler}>{this.state.reported}</button></div>
               </td>
-              <td>
+              <td className="reviewSingleRatings">
                 <div>
                   <div>Value for money</div>
-                  <span className="reviewStars" dangerouslySetInnerHTML={{__html: this.showStars(this.props.review.value_rating)}}/>
+                  <table className="reviewRatingBars"><tbody><tr>
+                    <td className={this.isGoldBar(1, review.value_rating)}></td>
+                    <td className={this.isGoldBar(2, review.value_rating)}></td>
+                    <td className={this.isGoldBar(3, review.value_rating)}></td>
+                    <td className={this.isGoldBar(4, review.value_rating)}></td>
+                    <td className={this.isGoldBar(5, review.value_rating)}></td></tr></tbody></table>
                   <div>Product quality</div>
-                  <span dangerouslySetInnerHTML={{__html: this.showStars(this.props.review.quality_rating)}}/>
+                  <table className="reviewRatingBars"><tbody><tr>
+                    <td className={this.isGoldBar(1, review.quality_rating)}></td>
+                    <td className={this.isGoldBar(2, review.quality_rating)}></td>
+                    <td className={this.isGoldBar(3, review.quality_rating)}></td>
+                    <td className={this.isGoldBar(4, review.quality_rating)}></td>
+                    <td className={this.isGoldBar(5, review.quality_rating)}></td></tr></tbody></table>
                   <div>Appearance</div>
-                  <span dangerouslySetInnerHTML={{__html: this.showStars(this.props.review.appearance_rating)}}/>
-                  <div>Ease of assembly</div>
-                  <span dangerouslySetInnerHTML={{__html: this.showStars(this.props.review.ease_of_assembly_rating)}}/>
+                  <table className="reviewRatingBars"><tbody><tr>
+                    <td className={this.isGoldBar(1, review.appearance_rating)}></td>
+                    <td className={this.isGoldBar(2, review.appearance_rating)}></td>
+                    <td className={this.isGoldBar(3, review.appearance_rating)}></td>
+                    <td className={this.isGoldBar(4, review.appearance_rating)}></td>
+                    <td className={this.isGoldBar(5, review.appearance_rating)}></td></tr></tbody></table>
                   <div>Works as expected</div>
-                  <span dangerouslySetInnerHTML={{__html: this.showStars(this.props.review.works_as_expected_rating)}}/>
+                  <table className="reviewRatingBars"><tbody><tr>
+                    <td className={this.isGoldBar(1, review.works_as_expected_rating)}></td>
+                    <td className={this.isGoldBar(2, review.works_as_expected_rating)}></td>
+                    <td className={this.isGoldBar(3, review.works_as_expected_rating)}></td>
+                    <td className={this.isGoldBar(4, review.works_as_expected_rating)}></td>
+                    <td className={this.isGoldBar(5, review.works_as_expected_rating)}></td></tr></tbody></table>
                 </div>
               </td>
             </tr>
