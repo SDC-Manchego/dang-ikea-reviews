@@ -1,4 +1,6 @@
 import React from 'react'
+import styled from 'styled-components'
+
 
 class Averages extends React.PureComponent {
   constructor(props) {
@@ -36,8 +38,35 @@ class Averages extends React.PureComponent {
   render (
   )
   { var Averages = this.getAverages(this.props.reviews);
+    const AverageTD = styled.td`
+      height: 4px;
+      width: 29;
+      border-collapse:
+      collapse;
+      border: 0.5px solid rgb(175, 175, 175);
+      opacity:0;
+    `
+    const AverageTable = styled.table.attrs(props => ({
+      bgcolor: "linear-gradient(90deg, #fc0 " + Averages.value_rating.avg()*20 + "%, white" + 100 - Averages.overall_rating.avg()*20 + "%)"
+      }))`
+        margin-top: 2px;
+        margin-bottom: 2px;
+        height: 4px;
+        width: 145px;
+        border-collapse:
+        collapse;
+        border: 0.5px solid rgb(175, 175, 175)
+        background-image: linear-gradient(90deg, #fc0 33%, white 33%);
+    `
     return (
       <div key={this.props.reviews}>
+        <AverageTable><tbody><tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        </tr></tbody></AverageTable>
         <p>Average Customer Ratings</p>
         <div className="reviewAverageOverall">
           <span>Overall</span><span> -= {Averages.overall_rating.avg().toFixed(1)} =- </span><span> {Averages.overall_rating.avg().toFixed(1)} </span></div>

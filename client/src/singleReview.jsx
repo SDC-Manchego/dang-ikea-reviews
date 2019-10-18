@@ -93,6 +93,7 @@ class SingleReview extends React.PureComponent {
     const review = this.props.review;
     return(
       <div>
+        <hr style={{border: '1px dotted', borderstyle: 'none none dotted', color: 'rgb(225,225,225'}} />
         <table>
           <tbody>
             <tr>
