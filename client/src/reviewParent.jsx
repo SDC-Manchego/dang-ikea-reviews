@@ -80,7 +80,7 @@ class ReviewParent extends React.PureComponent {
     return(
       <div>
         <table width="100%">
-          <thead ><tr><td>Reviews</td></tr></thead>
+          <thead ><tr><td className="tableHeading">Reviews</td></tr></thead>
           <tbody>
             <tr>
               <td className="reviewSnapShot" width="50%">
