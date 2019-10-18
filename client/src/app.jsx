@@ -2,19 +2,20 @@ import ReviewList from './reviewList.jsx'
 import SnapShot from './snapShot.jsx'
 import Averages from './average.jsx'
 
-class App extends React.Component {
+class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       reviewsArray: [],
       helpfulClicks:[],
-      reportedReviews: [],
       currentPage: 1,
       selectedStars: []
     };
     this.changeFilter = this.changeFilter.bind(this);
+    this.reviewAction = this.reviewAction.bind(this);
   }
 
+  //change filtering of review list based on selected star overall rating in review Summary
   changeFilter(classname) {
     var value = classname.slice(0,1);
     var change = classname.slice(1);
@@ -33,6 +34,27 @@ class App extends React.Component {
       console.log(this.state.selectedStars);})
     }
   }
+
+  reviewAction(id, action){
+    if (action !== "reported_count") {
+      var list = this.state.helpfulClicks;
+      list.push(id);
+    } else {
+      var list = this.state.helpfulClicks;
+    }
+    $.ajax({
+      type: "POST",
+      datatype: 'json',
+      contentType: 'application/json',
+      url: `/api-increment`,
+      data: JSON.stringify({ column: action, id: id }),
+      success: this.setState({
+        helpfulClicks: list
+      },
+      this.getReviewsByProductId(this.urlProductId()))
+    })
+  }
+
 
   urlProductId() {
     var questMarkLocation = (window.location.href).indexOf('?');
@@ -56,20 +78,26 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        Reviews
-        <table>
+        <h5>Reviews</h5>
+        <table width="100%">
           <tbody>
             <tr>
-              <td className="reviewSnapShot">
+              <td className="reviewSnapShot" width="50%">
                 <SnapShot reviews={this.state.reviewsArray} filter={this.state.selectedStars} changeFilter={this.changeFilter} />
               </td>
-              <td className="reviewAverage">
+              <td className="reviewAverageSummary" width="50%">
               <Averages reviews={this.state.reviewsArray} />
               </td>
             </tr>
+          </tbody>
+        </table>
+        <table width="100%">
+          <tbody>
             <tr>
-              <td className="reviewList">
-                <ReviewList reviews={this.state.reviewsArray} page={this.state.currentPage} helpfulClicks={this.state.helpfulClicks} reported={this.state.reportedReviews}  filter={this.state.selectedStars} />
+
+              <td className="reviewList" width="100%">
+
+                <ReviewList reviews={this.state.reviewsArray} page={this.state.currentPage} helpfulClicks={this.state.helpfulClicks} filter={this.state.selectedStars} reviewAction={this.reviewAction}/>
               </td>
             </tr>
           </tbody>

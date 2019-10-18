@@ -22,10 +22,19 @@ var getReviewsByProductId = function(req, callback) {
     if (error) {
       console.log(error);
     }
-    console.log('mysql results: ', results);
+    callback(null, results);
+  })
+}
+
+var incrementReviewCounts = function(req, callback) {
+  connection.query("UPDATE reviews SET ?? = ?? + 1 WHERE id = ?", [req.column, req.column, req.id], (error, results, fields) => {
+    if (error) {
+      console.log(error);
+    }
     callback(null, results);
   })
 }
 
 module.exports.getProductDataById = getProductDataById;
 module.exports.getReviewsByProductId = getReviewsByProductId;
+module.exports.incrementReviewCounts = incrementReviewCounts;

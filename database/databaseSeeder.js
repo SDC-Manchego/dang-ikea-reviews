@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 var rando = function(start, stop) {
-  return start + Math.ceil(Math.random() * (stop - start));
+  return start  + Math.round(Math.random() * (stop - start));
 };
 
 var productIdListMaker = function (qty) {
