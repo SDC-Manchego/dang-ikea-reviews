@@ -8,7 +8,6 @@ class Averages extends React.PureComponent {
 
   }
 
-
   AverageNode() {
     this._scores = [];
     this.avg = function() {
@@ -39,11 +38,23 @@ class Averages extends React.PureComponent {
   )
   { var Averages = this.getAverages(this.props.reviews);
 
+    const TransparentStars = styled.div`
+      display: inline-block;
+      background-color: white;
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: left;
+      mix-blend-mode: screen;
+    `
+
     const AverageOverallDiv = styled.div.attrs(props => ({
-      bgcolor: "linear-gradient(90deg, #fc0 " + (Averages.overall_rating.avg()*20).toString() + "%, white " + (100 - Averages.overall_rating.avg()*20).toString() + "%)"
+      bgcolor: "linear-gradient(90deg, #fc0 " + (Averages.overall_rating.avg()*20).toString() + "%, rgb(175, 175, 175) " + (100 - Averages.overall_rating.avg()*20).toString() + "%)"
       }))`
         display: inline-block;
-        width: 145px;
+        height: 20px
+        width: 78px;
+        max-width: 78px;
         background: ${props => props.bgcolor};
     `
        const AverageValDiv = styled.div.attrs(props => ({
@@ -82,7 +93,7 @@ class Averages extends React.PureComponent {
           <tbody>
             <tr>
               <td>Overall</td>
-              <td><AverageOverallDiv></AverageOverallDiv></td>
+              <td><AverageOverallDiv><TransparentStars>&#9733;&#9733;&#9733;&#9733;&#9733;</TransparentStars></AverageOverallDiv></td>
               <td>{Averages.overall_rating.avg().toFixed(1)}</td>
             </tr>
             <tr>
