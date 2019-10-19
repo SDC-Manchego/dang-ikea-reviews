@@ -30,7 +30,7 @@ recordSelection() {
     return(
       <div>
       {reviewList}
-      <div><button className="reviewsLastPage">&#9664;</button><button className="reviewsNextPage">&#9658;</button></div>
+      <div style={{align: "right"}}><button className="reviewsLastPage">&#9664;</button><button className="reviewsNextPage">&#9658;</button></div>
       </div>
     )
   }

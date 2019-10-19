@@ -263,6 +263,10 @@ h6 {
 	margin-bottom: 1rem
 }
 
+.tableHeading {
+  font-size: 16px;
+}
+
 body {
   font-family: 'Noto IKEA', 'Noto Sans', 'Roboto', 'Open Sans', sans-serif !important;
   font-size: 11px!important;
@@ -306,11 +310,26 @@ button {
   opacity: 0.33
 }
 
+.reviewPercentBars {
+  height: 10px;
+  width: 175px;
+  border-collapse:
+  collapse;
+  border: 0.5px solid rgb(175, 175, 175)
+}
+
 .reviewRatingBars {
   margin-top: 2px;
   margin-bottom: 2px;
   height: 4px;
   width: 220px;
+  border-collapse:
+  collapse;
+  border: 0.5px solid rgb(175, 175, 175)
+}
+.reviewAverageBars {
+  height: 8px;
+  width: 145px;
   border-collapse:
   collapse;
   border: 0.5px solid rgb(175, 175, 175)
@@ -327,3 +346,12 @@ button {
   border: 0.5px solid rgb(175, 175, 175)
 }
 
+.reviewAverageBars td, .reviewRatingBars td {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  height: 4px;
+  width: 220px;
+  border-collapse:
+  collapse;
+  border: 0.5px solid rgb(175, 175, 175)
+}
