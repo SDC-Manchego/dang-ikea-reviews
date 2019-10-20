@@ -1,8 +1,9 @@
+
 import React from 'react'
 import SingleReview from './singleReview.jsx'
 
 
-class ReviewList extends React.Component {
+class ReviewList extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -90,6 +91,7 @@ class ReviewList extends React.Component {
       .filter(review => this.props.filter.length > 0 ? this.props.filter[0] == review.overall_rating : -1 )
       .slice(...this.recordSelection())
       .map(review => <div key={review.id}><SingleReview review={review} helpfulClicks={this.props.helpfulClicks} reviewAction={this.props.reviewAction}/>
+
       </div>
     )
   ) {
@@ -98,7 +100,8 @@ class ReviewList extends React.Component {
         {this.rangeOfReviews()}
         {reviewList}
         <div>
-          <table style={{width: "100%"}}>
+          <table style={{maxWidth: "1200px",width:"100%"}}>
+
             <tbody>
               <tr>
                 <td style={{width: "50%", verticalAlign: "bottom"}}>{this.rangeOfReviews()}</td>
