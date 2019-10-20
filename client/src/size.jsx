@@ -34,10 +34,10 @@ class Size extends React.Component {
             <tr>
               <td style={{width:"12px"}}></td>
               <td style={{fontSize:"14px"}}>
-                <div> <span style={{fontWeight:"700"}}>Width: </span>{this.state.descriptionData.width} "</div>
-                <div> <span style={{fontWeight:"700"}}>Length: </span>{this.state.descriptionData.length} "</div>
-                <div> <span style={{fontWeight:"700"}}>Height: </span>{this.state.descriptionData.height} "</div>
-                <div> <span style={{fontWeight:"700"}}>Weight: </span>{this.state.descriptionData.weight} "</div>
+                <div> <span style={{fontWeight:"700"}}>Width: </span>{this.state.descriptionData.width}"</div>
+                <div> <span style={{fontWeight:"700"}}>Length: </span>{this.state.descriptionData.length}"</div>
+                <div> <span style={{fontWeight:"700"}}>Height: </span>{this.state.descriptionData.height}"</div>
+                <div> <span style={{fontWeight:"700"}}>Weight: </span>{this.state.descriptionData.weight} lbs.</div>
                 <p></p>
               </td>
             </tr>

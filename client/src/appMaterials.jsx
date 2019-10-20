@@ -6,16 +6,16 @@ class AppMaterials extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpenS: false,
-      isStartedS: false
+      isOpen: false,
+      isStarted: false
     };
     this.toggleOpen = this.toggleOpen.bind(this);
   }
 
   toggleOpen() {
     this.setState({
-      isStartedS: true,
-      isOpenS: !this.state.isOpenS
+      isStarted: true,
+      isOpen: !this.state.isOpen
     })
   }
 
@@ -43,7 +43,7 @@ class AppMaterials extends React.Component {
     `;
 
       const FadeInDiv = styled.div`
-      animation: ${props => this.state.isStartedS ? (this.state.isOpenS ? fadeIn : "") : "" } .75s;
+      animation: ${props => this.state.isStarted ? (this.state.isOpen ? fadeIn : "") : "" } .75s;
       animation-fill-mode: forwards;
       animation-direction: alternate;
     `;
@@ -51,10 +51,10 @@ class AppMaterials extends React.Component {
 
     return(
       <div>
-        <MaterialsParentDiv onClick={this.toggleOpen}>
-        <h5><Rotate isOpen={this.state.isOpenS} isStarted={this.state.isStartedS} >+</Rotate> Environment and Materials</h5>
+        <MaterialsParentDiv>
+        <h5 onClick={this.toggleOpen}><Rotate isOpen={this.state.isOpen} isStarted={this.state.isStarted} >+</Rotate> Environment and Materials</h5>
         <FadeInDiv>
-        {this.state.isStartedS ? (this.state.isOpenS ? <Materials /> : "") : "" }
+        {this.state.isStarted ? (this.state.isOpen ? <Materials /> : "") : "" }
     </FadeInDiv></MaterialsParentDiv>
       </div>
     )

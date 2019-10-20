@@ -34,7 +34,7 @@ class Description extends React.Component {
             <tr>
               <td style={{width:"12px"}}></td>
               <td>
-                <span className="descriptionHeading" style={{background:"black",color:"white",fontSize:"16px", fontWeight:"700"}}> {this.state.descriptionData.id}
+                <span className="descriptionHeading" style={{background:"black",color:"white",fontSize:"16px", fontWeight:"700", padding:"2px"}}> {this.state.descriptionData.id}
                 </span>
                 <p style={{fontSize:"14px"}}>{this.state.descriptionData.description}</p>
                 <div style={{fontSize:"16px",fontWeight:"700"}}>Designer</div>
