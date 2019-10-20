@@ -1,11 +1,8 @@
 import Rotate from './sectionBox.jsx'
 import styled, {keyframes} from 'styled-components'
-import AppDescription from './appDescription.jsx'
-import AppSize from './appSize.jsx'
-import AppMaterials from './appMaterials.jsx'
-import AppReview from './appReview.jsx'
+import ReviewParent from './reviewParent.jsx'
 
-class App extends React.Component {
+class AppReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -54,13 +51,15 @@ class App extends React.Component {
 
     return(
       <div>
-        <AppDescription/>
-        <AppSize/>
-        <AppMaterials/>
-        <AppReview/>
+        <ReviewParentDiv>
+        <h5 onClick={this.toggleOpen}><Rotate isOpen={this.state.isOpen} isStarted={this.state.isStarted} >+</Rotate> Reviews</h5>
+        <FadeInDiv>
+        {this.state.isStarted ? (this.state.isOpen ? <ReviewParent /> : "") : "" }
+    </FadeInDiv></ReviewParentDiv>
+
       </div>
     )
   }
 }
 
-export default App
+export default AppReview
