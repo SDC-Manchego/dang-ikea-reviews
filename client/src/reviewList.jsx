@@ -99,7 +99,7 @@ class ReviewList extends React.PureComponent {
         {this.rangeOfReviews()}
         {reviewList}
         <div>
-          <table style={{width: "100%"}}>
+          <table style={{maxWidth: "1200px",width:"100%"}}>
             <tbody>
               <tr>
                 <td style={{width: "50%", verticalAlign: "bottom"}}>{this.rangeOfReviews()}</td>
