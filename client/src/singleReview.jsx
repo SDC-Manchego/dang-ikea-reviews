@@ -10,31 +10,24 @@ class SingleReview extends React.PureComponent {
   }
 
   clickHandler(e) {
-    console.log(e.target.className);
-    if (e.target.className.indexOf('reviewHelpfulYes') > -1) {
-      var reviewId = e.target.className.slice(16);
+    //console.log(e.target.id);
+    if (e.target.id.indexOf('reviewHelpfulYes') > -1) {
+      var reviewId = e.target.id.slice(16);
       var action = 'helpful_count';
-      if (this.props.helpfulClicks.indexOf(reviewId) == -1) {
         this.props.reviewAction(reviewId, action)
-      }
-    } else if (e.target.className.indexOf('reviewHelpfulNo') > -1) {
-      var reviewId = e.target.className.slice(15);
+    } else if (e.target.id.indexOf('reviewHelpfulNo') > -1) {
+      var reviewId = e.target.id.slice(15);
       var action = 'not_helpful_count';
-      if (this.props.helpfulClicks.indexOf(reviewId) == -1) {
         this.props.reviewAction(reviewId, action)
-      }
-    } else if (e.target.className.indexOf('reviewReport') > -1) {
-      var reviewId = e.target.className.slice(12);
+    } else if (e.target.id.indexOf('reviewReport') > -1) {
+      var reviewId = e.target.id.slice(12);
       var action = 'reported_count';
-      if (this.state.reported == "Report") {
         this.props.reviewAction(reviewId, action);
         this.setState({
           reported: "Reported"
         })
-
       }
     }
-  }
 
   showDate(mysqlTime) {
     var year = Number(mysqlTime.substring(0,4));
@@ -96,10 +89,11 @@ class SingleReview extends React.PureComponent {
     const review = this.props.review;
     const helpfulYes = review.helpful_count;
     const helpfulNo = review.not_helpful_count;
+    const disableHelpButton = this.props.helpfulClicks.indexOf(review.id.toString()) > -1;
     return(
       <div>
         <hr style={{border: '1px dotted', borderstyle: 'none none dotted', color: 'rgb(225,225,225'}} />
-        <table>
+        <table style={{width: "100%"}}>
           <tbody>
             <tr>
              <td className="reviewSingleMain">
@@ -112,9 +106,9 @@ class SingleReview extends React.PureComponent {
               <p>{this.props.review.text}</p>
               <p>{this.showRecommendation(this.props.review.recommended)}</p>
               <div>Helpful?
-                <button key={this.props.review.id + "y"} className={"reviewHelpfulYes" + this.props.review.id} onClick={this.clickHandler}>Yes - {helpfulYes}</button>
-                <button key={this.props.review.id + "n"} className={"reviewHelpfulNo" + this.props.review.id} onClick={this.clickHandler}>No - {helpfulNo}</button>
-                <button key={this.props.review.id + "r"} className={"reviewReport" + this.props.review.id} onClick={this.clickHandler}>{this.state.reported}</button></div>
+                <button disabled={disableHelpButton} key={review.id + "y"} id={"reviewHelpfulYes" + review.id} className="reviewHelpYes" onClick={this.clickHandler}><span style={{color:"black"}}>Yes </span>· {helpfulYes}</button>
+                <button disabled={disableHelpButton} key={review.id + "n" } id={"reviewHelpfulNo" + review.id} className="reviewHelpNo" onClick={this.clickHandler}><span style={{color:"black"}}>No </span> · {helpfulNo}</button>
+                <button disabled={this.state.reported === "Reported"} key={review.id + "r"} id={"reviewReport" + this.props.review.id} className="reviewHelpReport" onClick={this.clickHandler}>{this.state.reported}</button></div>
               </td>
               <td className="reviewSingleRatings">
                 <div>

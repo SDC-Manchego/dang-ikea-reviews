@@ -147,9 +147,9 @@ h4 {
 h5,
 h6 {
 	font-size: 1.25rem;
+	line-height: 1.2;
 	font-weight: 700;
-  padding-bottom: 1rem;
-  padding-top: 1rem
+	margin-bottom: 1rem
 }
 
 .page-headline {
@@ -284,12 +284,12 @@ td {
 
 .reviewSingleMain {
   width: 66%;
-  max-width: 700px;
+  max-width: 1200px;
   padding: 8px
 }
 .reviewSingleRatings {
   width: 34%;
-  padding: 8px
+  padding: 8px;
 }
 
 .reviewTitle {
@@ -354,4 +354,56 @@ button {
   border-collapse:
   collapse;
   border: 0.5px solid rgb(175, 175, 175)
+}
+
+.reviewHelpButton, .reviewsPage {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-radius: 0px;
+  font-size:13px;
+  font-weight: 600;
+  border: none;
+  background-color: rgb(234, 234, 234)
+}
+
+
+.reviewsPage:hover, .reviewHelpYes:hover, .reviewHelpNo:hover, .reviewHelpReport:hover{
+  box-shadow: 0 0 8px rgba(168, 168, 168, 0.9) inset;
+}
+
+button:focus{
+  outline: 0;
+}
+
+.reviewsPage:disabled{
+  color: rgb(130,130,130);
+  box-shadow: 0 0 0px rgba(255, 255, 255, 0) inset;
+}
+
+.reviewHelpYes,.reviewHelpNo, .reviewHelpReport, .reviewFilterButton{
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-radius: 0px;
+  font-size:13px;
+  font-weight: 600;
+  border: none;
+  background-color: rgb(234, 234, 234)
+
+}
+
+.reviewHelpYes:disabled{
+  color:green;
+  box-shadow: 0 0 0px rgba(255, 255, 255, 0) inset;
+}
+
+.reviewHelpNo:disabled{
+  color: red;
+  box-shadow: 0 0 0px rgba(255, 255, 255, 0) inset;
+}
+
+.reviewHelpReport:disabled{
+  background-color: white;
+  color: black;
+  font-style: italic;
+  box-shadow: 0 0 0px rgba(255, 255, 255, 0) inset;
 }

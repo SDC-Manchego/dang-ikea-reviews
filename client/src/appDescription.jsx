@@ -2,7 +2,7 @@ import Rotate from './sectionBox.jsx'
 import styled, {keyframes} from 'styled-components'
 import Description from './description.jsx'
 
-class AppDescription extends React.PureComponent {
+class AppDescription extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

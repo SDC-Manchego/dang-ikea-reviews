@@ -2,20 +2,20 @@ import Rotate from './sectionBox.jsx'
 import styled, {keyframes} from 'styled-components'
 import Size from './size.jsx'
 
-class AppSize extends React.PureComponent {
+class AppSize extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false,
-      isStarted: false
+      isOpenS: false,
+      isStartedS: false
     };
     this.toggleOpen = this.toggleOpen.bind(this);
   }
 
   toggleOpen() {
     this.setState({
-      isStarted: true,
-      isOpen: !this.state.isOpen
+      isStartedS: true,
+      isOpenS: !this.state.isOpenS
     })
   }
 
@@ -41,7 +41,7 @@ class AppSize extends React.PureComponent {
     `;
 
       const FadeInDiv = styled.div`
-      animation: ${props => this.state.isStarted ? (this.state.isOpen ? fadeIn : "") : "" } .75s;
+      animation: ${props => this.state.isStartedS ? (this.state.isOpenS ? fadeIn : "") : "" } .75s;
       animation-fill-mode: forwards;
       animation-direction: alternate;
     `;
@@ -50,9 +50,9 @@ class AppSize extends React.PureComponent {
     return(
       <div>
         <SizeParentDiv>
-        <h5><Rotate isOpen={this.state.isOpen} isStarted={this.state.isStarted} onClick={this.toggleOpen}>+</Rotate> Size</h5>
+        <h5><Rotate isOpen={this.state.isOpenS} isStarted={this.state.isStartedS} onClick={this.toggleOpen}>+</Rotate> Size</h5>
         <FadeInDiv>
-        {this.state.isStarted ? (this.state.isOpen ? <Size /> : "") : "" }
+        {this.state.isStartedS ? (this.state.isOpenS ? <Size /> : "") : "" }
     </FadeInDiv></SizeParentDiv>
       </div>
     )
