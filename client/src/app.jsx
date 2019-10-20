@@ -3,6 +3,7 @@ import styled, {keyframes} from 'styled-components'
 import ReviewParent from './reviewParent.jsx'
 import AppDescription from './appDescription.jsx'
 import AppSize from './appSize.jsx'
+import AppMaterials from './appMaterials.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -55,8 +56,9 @@ class App extends React.Component {
       <div>
         <AppDescription/>
         <AppSize/>
-        <ReviewParentDiv>
-        <h5><Rotate isOpen={this.state.isOpen} isStarted={this.state.isStarted} onClick={this.toggleOpen}>+</Rotate> Reviews</h5>
+        <AppMaterials/>
+        <ReviewParentDiv onClick={this.toggleOpen}>
+        <h5><Rotate isOpen={this.state.isOpen} isStarted={this.state.isStarted} >+</Rotate> Reviews</h5>
         <FadeInDiv>
         {this.state.isStarted ? (this.state.isOpen ? <ReviewParent /> : "") : "" }
     </FadeInDiv></ReviewParentDiv>
