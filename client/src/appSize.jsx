@@ -23,6 +23,8 @@ class AppSize extends React.Component {
     const SizeParentDiv = styled.div`
       display: block;
       width: 100%;
+      min-height: 70px;
+      vertical-align: center;
       border-top: 1px solid grey;
 
       :hover {

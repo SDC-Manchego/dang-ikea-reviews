@@ -27,7 +27,7 @@ class App extends React.Component {
     const ReviewParentDiv = styled.div`
       display: block;
       width: 100%;
-      height: 60px;
+      min-height: 70px;
       vertical-align: center;
       border-top: 1px solid grey;
       :hover {
