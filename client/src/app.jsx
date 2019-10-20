@@ -26,6 +26,8 @@ class App extends React.Component {
     const ReviewParentDiv = styled.div`
       display: block;
       width: 100%;
+      height: 60px;
+      vertical-align: center;
       border-top: 1px solid grey;
       :hover {
         background-color: ${props => this.state.isOpen ? "white" : "rgb(230, 240, 255)"};
