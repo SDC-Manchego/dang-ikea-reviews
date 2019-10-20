@@ -2,6 +2,7 @@
 import React from 'react'
 import SingleReview from './singleReview.jsx'
 
+
 class ReviewList extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -100,6 +101,7 @@ class ReviewList extends React.PureComponent {
         {reviewList}
         <div>
           <table style={{maxWidth: "1200px",width:"100%"}}>
+
             <tbody>
               <tr>
                 <td style={{width: "50%", verticalAlign: "bottom"}}>{this.rangeOfReviews()}</td>
