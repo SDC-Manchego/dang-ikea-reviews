@@ -147,9 +147,9 @@ h4 {
 h5,
 h6 {
 	font-size: 1.25rem;
-	line-height: 1.2;
 	font-weight: 700;
-	margin-bottom: 1rem
+  padding-bottom: 1rem;
+  padding-top: 1rem
 }
 
 .page-headline {

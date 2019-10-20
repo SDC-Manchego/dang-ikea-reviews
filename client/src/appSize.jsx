@@ -1,9 +1,8 @@
 import Rotate from './sectionBox.jsx'
 import styled, {keyframes} from 'styled-components'
-import ReviewParent from './reviewParent.jsx'
-import AppDescription from './appDescription.jsx'
+import Size from './size.jsx'
 
-class App extends React.PureComponent {
+class AppSize extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,20 +17,20 @@ class App extends React.PureComponent {
       isStarted: true,
       isOpen: !this.state.isOpen
     })
-    console.log(this.state.Open)
   }
 
   render() {
-    const ReviewParentDiv = styled.div`
+    const SizeParentDiv = styled.div`
       display: block;
       width: 100%;
       border-top: 1px solid grey;
+
       :hover {
         background-color: ${props => this.state.isOpen ? "white" : "rgb(230, 240, 255)"};
       }`;
       const fadeIn = keyframes`
       from {
-        transform: translate(0px,-50px);
+        transform: translate(0px,-20px);
         opacity: 0;
       }
 
@@ -50,16 +49,14 @@ class App extends React.PureComponent {
 
     return(
       <div>
-        <AppDescription/>
-        <ReviewParentDiv>
-        <h5><Rotate isOpen={this.state.isOpen} isStarted={this.state.isStarted} onClick={this.toggleOpen}>+</Rotate> Reviews</h5>
+        <SizeParentDiv>
+        <h5><Rotate isOpen={this.state.isOpen} isStarted={this.state.isStarted} onClick={this.toggleOpen}>+</Rotate> Size</h5>
         <FadeInDiv>
-        {this.state.isStarted ? (this.state.isOpen ? <ReviewParent /> : "") : "" }
-    </FadeInDiv></ReviewParentDiv>
-
+        {this.state.isStarted ? (this.state.isOpen ? <Size /> : "") : "" }
+    </FadeInDiv></SizeParentDiv>
       </div>
     )
   }
 }
 
-export default App
+export default AppSize
