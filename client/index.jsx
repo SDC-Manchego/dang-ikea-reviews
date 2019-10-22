@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './src/app.jsx';
+import Reviews from './src/app.jsx';
 
 ReactDOM.render(
-  <App />,
+  <Reviews />,
   document.getElementById('reviewApp'),
 );
+
+export default Reviews;
