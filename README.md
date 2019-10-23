@@ -18,6 +18,11 @@
 
 > The client/index.jsx file is the entry point for webpack to bundle the files. Linking my component to Jeff's product description page means that his links for reviews (id ReviewsSection) and description (id DescriptionSection) will need to navigate to those elements of the page and use the toggleOpen functions in appDescription.jsx and appReview.jsx files. I believe using ref hooks (see https://reactjs.org/docs/refs-and-the-dom.html )can accomplish this, but let me know if I can help sort this out.
 
+From the database directory:
+Use 'mysql -u root < mySchema.sql' to initialize and setup the database (changing the mysql login to fit your requirements).
+Use 'npm seed' to seed the database
+
+
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
