@@ -6,7 +6,6 @@ import styled, { keyframes } from 'styled-components';
 import Rotate from '../sectionBox.jsx';
 import ReviewParent from './reviewParent.jsx';
 // eslint-disable-next-line no-unused-vars
-import css from '../reviewStyle.css';
 
 class AppReview extends React.Component {
   constructor(props) {

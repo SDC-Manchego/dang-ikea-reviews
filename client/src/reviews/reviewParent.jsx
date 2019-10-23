@@ -3,7 +3,6 @@ import $ from 'jquery';
 import ReviewList from './reviewList.jsx';
 import SnapShot from './snapShot.jsx';
 import Averages from './average.jsx';
-import css from '../reviewStyle.css';
 
 class ReviewParent extends React.PureComponent {
   constructor(props) {
