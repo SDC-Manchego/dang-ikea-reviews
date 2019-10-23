@@ -38,6 +38,7 @@ class ReviewList extends React.PureComponent {
   }
 
   pageUp() {
+    this.setLastPage();
     const { currentPage, lastPage } = this.state;
     if (currentPage < lastPage) {
       this.setState({
@@ -75,7 +76,6 @@ class ReviewList extends React.PureComponent {
     return `${start} - ${end} of ${length} Reviews`;
   }
 
-
   recordSelection() {
     const { currentPage } = this.state;
     if (currentPage === 1) {
@@ -86,9 +86,7 @@ class ReviewList extends React.PureComponent {
     return [start, end];
   }
 
-
   render(
-
   ) {
     const {
       filtered, reviews, reviewAction, helpfulClicks,
