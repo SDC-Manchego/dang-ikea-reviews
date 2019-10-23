@@ -74,6 +74,9 @@ class ReviewParent extends React.PureComponent {
   // eslint-disable-next-line class-methods-use-this
   urlProductId() {
     const questMarkLocation = (window.location.href).indexOf('?');
+    if (questMarkLocation === -1) {
+      return '123.456.78';
+    }
     return (window.location.href).slice(questMarkLocation + 1);
   }
 

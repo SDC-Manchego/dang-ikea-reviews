@@ -4,7 +4,8 @@ import Reviews from './src/app.jsx';
 
 ReactDOM.render(
   <Reviews />,
-  document.getElementById('reviewApp'),
+  document.getElementById('Reviews'),
+
 );
 
 export default Reviews;
