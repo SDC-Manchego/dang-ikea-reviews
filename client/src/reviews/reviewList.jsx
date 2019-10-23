@@ -15,11 +15,12 @@ class ReviewList extends React.PureComponent {
     this.setLastPage = this.setLastPage.bind(this);
     this.pageUp = this.pageUp.bind(this);
     this.pageDown = this.pageDown.bind(this);
+    this.scrollDiv = React.createRef();
   }
 
 
   componentDidMount() {
-    setTimeout(() => { this.setLastPage(); }, 1000);
+    setTimeout(() => { this.setLastPage(); }, 500);
   }
 
   setLastPage() {
@@ -43,7 +44,7 @@ class ReviewList extends React.PureComponent {
     if (currentPage < lastPage) {
       this.setState({
         currentPage: currentPage + 1,
-      });
+      }, this.scrollDiv.current.scrollIntoView({ behavior: 'smooth' }));
     }
   }
 
@@ -52,7 +53,7 @@ class ReviewList extends React.PureComponent {
     if (currentPage > 1) {
       this.setState({
         currentPage: currentPage - 1,
-      });
+      }, this.scrollDiv.current.scrollIntoView({ behavior: 'smooth' }));
     }
   }
 
@@ -101,7 +102,7 @@ class ReviewList extends React.PureComponent {
         </div>
       ));
     return (
-      <div>
+      <div ref={this.scrollDiv}>
         {this.rangeOfReviews()}
         {reviewList}
         <div>

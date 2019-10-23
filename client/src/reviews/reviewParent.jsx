@@ -61,7 +61,7 @@ class ReviewParent extends React.PureComponent {
       type: 'POST',
       datatype: 'json',
       contentType: 'application/json',
-      url: '/api-increment',
+      url: 'http://localhost:3003/api-increment',
       data: JSON.stringify({ column: action, id }),
       success: this.setState({
         helpfulClicks: list,
@@ -78,53 +78,53 @@ class ReviewParent extends React.PureComponent {
   }
 
   reviewStructure() {
-  const { reviewsArray, selectedStars, helpfulClicks } = this.state;
-  return (
-    <div>
-      <table>
-        <tbody>
-          <tr>
-            <td style={{ width: '12px' }} />
-            <td>
-              <table width="100%">
-                <thead><tr><td className="tableHeading">Reviews</td></tr></thead>
-                <tbody>
-                  <tr>
-                    <td className="reviewSnapShot" width="50%">
-                      <SnapShot
-                        reviews={reviewsArray}
-                        filtered={selectedStars}
-                        changeFilter={this.changeFilter}
-                      />
-                    </td>
-                    <td className="reviewAverageSummary" width="50%">
-                      <Averages reviews={reviewsArray} />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <table width="100%">
-                <tbody>
-                  <tr>
-                    <td className="reviewList" width="100%">
-                      <ReviewList
-                        reviews={reviewsArray}
-                        helpfulClicks={helpfulClicks}
-                        filtered={selectedStars}
-                        reviewAction={this.reviewAction}
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
+    const { reviewsArray, selectedStars, helpfulClicks } = this.state;
+    return (
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <td style={{ width: '12px' }} />
+              <td>
+                <table width="100%">
+                  <thead><tr><td className="tableHeading">Reviews</td></tr></thead>
+                  <tbody>
+                    <tr>
+                      <td className="reviewSnapShot" width="50%">
+                        <SnapShot
+                          reviews={reviewsArray}
+                          filtered={selectedStars}
+                          changeFilter={this.changeFilter}
+                        />
+                      </td>
+                      <td className="reviewAverageSummary" width="50%">
+                        <Averages reviews={reviewsArray} />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table width="100%">
+                  <tbody>
+                    <tr>
+                      <td className="reviewList" width="100%">
+                        <ReviewList
+                          reviews={reviewsArray}
+                          helpfulClicks={helpfulClicks}
+                          filtered={selectedStars}
+                          reviewAction={this.reviewAction}
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
 
-          </tr>
+            </tr>
 
-        </tbody>
+          </tbody>
 
-      </table>
-    </div>
+        </table>
+      </div>
     );
   }
 
@@ -132,9 +132,13 @@ class ReviewParent extends React.PureComponent {
     const { reviewsArray } = this.state;
     return (
       <div>
-        {reviewsArray.length === 0 ? (<p>There are no reviews for this item</p>) : this.reviewStructure()}
+        {reviewsArray.length === 0 ? (
+          <p>
+            There are no reviews for this item
+          </p>
+        ) : this.reviewStructure()}
       </div>
-    )
+    );
   }
 }
 
