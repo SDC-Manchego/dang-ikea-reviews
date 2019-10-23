@@ -22,17 +22,6 @@ class ReviewParent extends React.PureComponent {
   }
 
   getReviewsByProductId(id) {
-    // $.ajax({
-    //   url: 'http://localhost:3003/api-reviews',
-    //   type: 'GET',
-    //   query: JSON.stringify({ product_id: id }),
-    //   dataType: 'json',
-    //   crossDomain: true,
-    // }).done((data) => {
-    //   this.setState({
-    //     reviewsArray: data,
-    //   });
-    // });
     $.get('http://localhost:3003/api-reviews', { product_id: id }, (data) => {
       this.setState({
         reviewsArray: data,
@@ -88,55 +77,64 @@ class ReviewParent extends React.PureComponent {
     return (window.location.href).slice(questMarkLocation + 1);
   }
 
+  reviewStructure() {
+  const { reviewsArray, selectedStars, helpfulClicks } = this.state;
+  return (
+    <div>
+      <table>
+        <tbody>
+          <tr>
+            <td style={{ width: '12px' }} />
+            <td>
+              <table width="100%">
+                <thead><tr><td className="tableHeading">Reviews</td></tr></thead>
+                <tbody>
+                  <tr>
+                    <td className="reviewSnapShot" width="50%">
+                      <SnapShot
+                        reviews={reviewsArray}
+                        filtered={selectedStars}
+                        changeFilter={this.changeFilter}
+                      />
+                    </td>
+                    <td className="reviewAverageSummary" width="50%">
+                      <Averages reviews={reviewsArray} />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table width="100%">
+                <tbody>
+                  <tr>
+                    <td className="reviewList" width="100%">
+                      <ReviewList
+                        reviews={reviewsArray}
+                        helpfulClicks={helpfulClicks}
+                        filtered={selectedStars}
+                        reviewAction={this.reviewAction}
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+    );
+  }
+
   render() {
-    const { reviewsArray, selectedStars, helpfulClicks } = this.state;
+    const { reviewsArray } = this.state;
     return (
       <div>
-        <table>
-          <tbody>
-            <tr>
-              <td style={{ width: '12px' }} />
-              <td>
-                <table width="100%">
-                  <thead><tr><td className="tableHeading">Reviews</td></tr></thead>
-                  <tbody>
-                    <tr>
-                      <td className="reviewSnapShot" width="50%">
-                        <SnapShot
-                          reviews={reviewsArray}
-                          filtered={selectedStars}
-                          changeFilter={this.changeFilter}
-                        />
-                      </td>
-                      <td className="reviewAverageSummary" width="50%">
-                        <Averages reviews={reviewsArray} />
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <table width="100%">
-                  <tbody>
-                    <tr>
-                      <td className="reviewList" width="100%">
-                        <ReviewList
-                          reviews={reviewsArray}
-                          helpfulClicks={helpfulClicks}
-                          filtered={selectedStars}
-                          reviewAction={this.reviewAction}
-                        />
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-
-            </tr>
-
-          </tbody>
-
-        </table>
+        {reviewsArray.length === 0 ? (<p>There are no reviews for this item</p>) : this.reviewStructure()}
       </div>
-    );
+    )
   }
 }
 
