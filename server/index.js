@@ -3,12 +3,14 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
 const db = require('../database/index.js');
 
 const port = 3003;
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'), {});
@@ -44,7 +46,7 @@ app.post('/api-increment', (req, res) => {
       res.end(JSON.stringify(results));
     }
   });
-},);
+});
 
 
 app.listen(port, () => {

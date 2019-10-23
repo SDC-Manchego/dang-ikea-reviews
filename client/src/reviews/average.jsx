@@ -3,6 +3,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
 import styled from 'styled-components';
+import css from '../reviewStyle.css';
 
 
 class Averages extends React.PureComponent {

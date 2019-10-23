@@ -3,6 +3,7 @@ import $ from 'jquery';
 import ReviewList from './reviewList.jsx';
 import SnapShot from './snapShot.jsx';
 import Averages from './average.jsx';
+import css from '../reviewStyle.css';
 
 class ReviewParent extends React.PureComponent {
   constructor(props) {
@@ -21,7 +22,18 @@ class ReviewParent extends React.PureComponent {
   }
 
   getReviewsByProductId(id) {
-    $.get('/api-reviews', { product_id: id }, (data) => {
+    // $.ajax({
+    //   url: 'http://localhost:3003/api-reviews',
+    //   type: 'GET',
+    //   query: JSON.stringify({ product_id: id }),
+    //   dataType: 'json',
+    //   crossDomain: true,
+    // }).done((data) => {
+    //   this.setState({
+    //     reviewsArray: data,
+    //   });
+    // });
+    $.get('http://localhost:3003/api-reviews', { product_id: id }, (data) => {
       this.setState({
         reviewsArray: data,
       });
