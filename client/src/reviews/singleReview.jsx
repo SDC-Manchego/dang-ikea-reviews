@@ -121,17 +121,17 @@ class SingleReview extends React.PureComponent {
                 <p>{review.text}</p>
                 <p>{this.showRecommendation(review.recommended)}</p>
                 <div>
-Helpful?
+                  Helpful?
                   <button type="button" disabled={disableHelpButton} key={`${review.id}y`} id={`reviewHelpfulYes${review.id}`} className="reviewHelpYes" onClick={this.clickHandler}>
                     <span style={{ color: 'black' }}>Yes </span>
-·
+                    ·
                     {' '}
                     {helpfulYes}
                   </button>
                   <button type="button" disabled={disableHelpButton} key={`${review.id}n`} id={`reviewHelpfulNo${review.id}`} className="reviewHelpNo" onClick={this.clickHandler}>
                     <span style={{ color: 'black' }}>No </span>
                     {' '}
-·
+                    ·
                     {' '}
                     {helpfulNo}
                   </button>
