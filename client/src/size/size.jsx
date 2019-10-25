@@ -26,13 +26,12 @@ class Size extends React.Component {
   urlProductId() {
     const questMarkLocation = (window.location.href).indexOf('?');
     if (questMarkLocation === -1) {
-      return '123.456.78';
+      return '0';
     }
     return (window.location.href).slice(questMarkLocation + 1);
   }
 
-
-  render() {
+  sizeStructure() {
     const { descriptionData } = this.state;
     return (
       <table>
@@ -72,7 +71,21 @@ class Size extends React.Component {
       </table>
     );
   }
+
+
+
+  render() {
+    const { descriptionData } = this.state;
+    return (
+      <div>
+        {!descriptionData ? (
+        <p>
+          Sorry, we don&apos;t have any size information for this product.
+        </p>
+        ) : this.sizeStructure()}
+      </div>
+
+    );
+  }
 }
-
-
 export default Size;

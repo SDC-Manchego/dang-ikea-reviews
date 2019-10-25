@@ -26,12 +26,12 @@ class Materials extends React.Component {
   urlProductId() {
     const questMarkLocation = (window.location.href).indexOf('?');
     if (questMarkLocation === -1) {
-      return '123.456.78';
+      return '0';
     }
     return (window.location.href).slice(questMarkLocation + 1);
   }
 
-  render() {
+  materialsStructure() {
     const { descriptionData } = this.state;
     return (
       <table>
@@ -49,6 +49,19 @@ class Materials extends React.Component {
           </tr>
         </tbody>
       </table>
+    );
+  }
+
+  render() {
+    const { descriptionData } = this.state;
+    return (
+      <div>
+        {!descriptionData ? (
+          <p>
+            Sorry, we don&apos;t have any environment or materials information for this product.
+          </p>
+        ) : this.materialsStructure()}
+      </div>
     );
   }
 }

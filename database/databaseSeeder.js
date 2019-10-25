@@ -17,9 +17,8 @@ function rando(start, stop) {
 function productIdListMaker(qty) {
   const list = [];
   for (let i = 0; i < qty; i += 1) {
-    list.push(`${rando(100, 999).toString()}.${rando(100, 999).toString()}.${ rando(10, 99).toString()}`);
+    list.push(i);
   }
-  list.unshift('123.456.78');
   return list;
 }
 
@@ -92,7 +91,7 @@ const insertReviewSeeds = function (idList, recordMaker, count) {
 
 function Overseeder() {
   const obj = {};
-  obj.product_id = '123.456.78';
+  obj.product_id = '0';
   obj.title = casual.title;
   obj.text = casual.sentences(rando(2, 5));
   obj.date = new Date(new Date() - rando(0, 70000000000)).toISOString().slice(0, 10);
@@ -121,7 +120,7 @@ let overSeedReviews = function (recordMaker, count) {
   }
 };
 
-const seedReviews = () => { insertReviewSeeds(productIdList, ReviewRecordMaker, 200); };
+const seedReviews = () => { insertReviewSeeds(productIdList, ReviewRecordMaker, 944); };
 const seedProducts = () => { insertProductSeeds(productIdList, ProductRecordMaker); };
 const overSeed = () => { overSeedReviews(Overseeder, 66); };
 const seedAccordion = () => {
