@@ -4,7 +4,7 @@ USE ikea_reviews;
 
 CREATE TABLE reviews (
 id 	INT UNIQUE NOT NULL AUTO_INCREMENT,
-product_id VARCHAR(10),
+product_id TINYINT,
 title 	VARCHAR(100),
 text	TEXT NOT NULL,
 date	DATE NOT NULL,
@@ -23,7 +23,7 @@ PRIMARY KEY(id)
 );
 
 CREATE TABLE product_data (
-id VARCHAR(10) UNIQUE NOT NULL,
+id TINYINT UNIQUE NOT NULL,
 description	TEXT,
 product_name VARCHAR(50),
 designer VARCHAR(50),

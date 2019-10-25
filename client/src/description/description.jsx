@@ -22,16 +22,7 @@ class Description extends React.Component {
     }, 'json');
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  urlProductId() {
-    const questMarkLocation = (window.location.href).indexOf('?');
-    if (questMarkLocation === -1) {
-      return '123.456.78';
-    }
-    return (window.location.href).slice(questMarkLocation + 1);
-  }
-
-  render() {
+  descriptionStructure() {
     const { descriptionData } = this.state;
 
     return (
@@ -47,7 +38,8 @@ class Description extends React.Component {
                 }}
               >
                 {' '}
-                {descriptionData.id}
+                924.342.
+                {(descriptionData.id < 10) ? (`0${descriptionData.id}`) : descriptionData.id}
               </span>
               <p style={{ fontSize: '14px' }}>{descriptionData.description}</p>
               <div style={{ fontSize: '16px', fontWeight: '700' }}>Designer</div>
@@ -57,6 +49,28 @@ class Description extends React.Component {
           </tr>
         </tbody>
       </table>
+    );
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  urlProductId() {
+    const questMarkLocation = (window.location.href).indexOf('?');
+    if (questMarkLocation === -1) {
+      return '0';
+    }
+    return (window.location.href).slice(questMarkLocation + 1);
+  }
+
+  render() {
+    const { descriptionData } = this.state;
+    return (
+      <div>
+        {!descriptionData ? (
+          <p>
+            Sorry, we don&apos;t have any product information for this product.
+          </p>
+        ) : this.descriptionStructure()}
+      </div>
     );
   }
 }

@@ -3,6 +3,7 @@ import $ from 'jquery';
 import ReviewList from './reviewList.jsx';
 import SnapShot from './snapShot.jsx';
 import Averages from './average.jsx';
+// eslint-disable-next-line no-unused-vars
 import css from '../reviewStyle.css';
 
 class ReviewParent extends React.PureComponent {
@@ -53,13 +54,13 @@ class ReviewParent extends React.PureComponent {
   urlProductId() {
     const questMarkLocation = (window.location.href).indexOf('?');
     if (questMarkLocation === -1) {
-      return '123.456.78';
+      return '0';
     }
     return (window.location.href).slice(questMarkLocation + 1);
   }
 
   reviewStructure() {
-    const { reviewsArray, selectedStars, helpfulClicks } = this.state;
+    const { reviewsArray, selectedStars } = this.state;
     return (
       <div>
         <table>
@@ -113,7 +114,7 @@ class ReviewParent extends React.PureComponent {
       <div>
         {reviewsArray.length === 0 ? (
           <p>
-            There are no reviews for this item
+            There are no reviews for this item.
           </p>
         ) : this.reviewStructure()}
       </div>
