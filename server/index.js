@@ -28,6 +28,12 @@ app.get('/api-reviews', (req, res) => {
   });
 });
 
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.get('/api-product-data', (req, res) => {
   db.getProductDataById(req.query, (err, results) => {
     if (err) {
