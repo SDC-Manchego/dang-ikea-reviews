@@ -1,8 +1,9 @@
 var mysql = require('mysql');
 var casual = require('casual');
 var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
+  host: 'ec2-3-14-80-255.us-east-2.compute.amazonaws.com',
+  user: 'pikearev',
+  password: 'parsnip8000',
   database: 'ikea_reviews'
 });
 

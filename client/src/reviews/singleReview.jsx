@@ -55,7 +55,7 @@ class SingleReview extends React.PureComponent {
       type: 'POST',
       datatype: 'json',
       contentType: 'application/json',
-      url: 'http://localhost:3003/api-increment',
+      url: 'http://ec2-3-19-218-185.us-east-2.compute.amazonaws.com:3003/api-increment',
       data: JSON.stringify({ column: action, id }),
       success: this.setState({
         helpfulClicks: list,
