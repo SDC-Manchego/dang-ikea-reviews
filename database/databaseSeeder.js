@@ -5,6 +5,7 @@ const casual = require('casual');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
+  password: 'parsnip9000',
   database: 'ikea_reviews',
 });
 

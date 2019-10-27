@@ -21,7 +21,7 @@ class ReviewParent extends React.PureComponent {
   }
 
   getReviewsByProductId(id, callback = () => {}) {
-    $.get('http://localhost:3003/api-reviews', { product_id: id }, (data) => {
+    $.get('http://ec2-3-19-218-185.us-east-2.compute.amazonaws.com:3003/api-reviews', { product_id: id }, (data) => {
       this.setState({
         reviewsArray: data,
       }, callback);
@@ -117,7 +117,11 @@ class ReviewParent extends React.PureComponent {
     );
     return (
       <div>
-        {reviewsArray.length === 0 ? setTimeout(() => { return noReviews; }, 750) : this.reviewStructure()}
+        {reviewsArray.length === 0 ? (
+          <p>
+            There are no reviews for this item.
+          </p>
+        ) : this.reviewStructure()}
       </div>
     );
   }
