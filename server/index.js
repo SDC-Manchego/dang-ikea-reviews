@@ -29,7 +29,7 @@ app.get('/api-reviews', (req, res) => {
 });
 
 app.get('*.js', (req, res, next) => {
-  req.url = req.url + '.gz';
+  req.url += '.gz';
   res.set('Content-Encoding', 'gzip');
   next();
 });
