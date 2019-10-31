@@ -16,9 +16,8 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'), {});
 });
 
-app.get('/api-reviews', (req, res) => {
-  // console.log("received request: ", req.query);
-  db.getReviewsByProductId(req.query, (err, results) => {
+app.get('/api-reviews/:productid', (req, res) => {
+  db.getReviewsByProductId(req.params.productid, (err, results) => {
     if (err) {
       throw err;
     } else {
@@ -56,7 +55,7 @@ app.post('/api-reviews', (req, res) => {
   });
 });
 app.delete('/api-reviews/:id', (req, res) => {
-  db.deleteReviewsByProductId(req.params.id, (err, results) => {
+  db.deleteReviewsById(req.params.id, (err, results) => {
     if (err) {
       throw err;
     }

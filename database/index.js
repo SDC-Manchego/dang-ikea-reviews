@@ -18,17 +18,18 @@ const getProductDataById = function (req, callback) {
     callback(null, results);
   });
 };
-
-const getReviewsByProductId = function (req, callback) {
-  connection.query('SELECT * FROM reviews WHERE product_id = ?', req.product_id, (error, results, fields) => {
+// get reviews for one product
+const getReviewsByProductId = function (productid, callback) {
+  const queryString = `SELECT * FROM reviews WHERE product_id = ${connection.escape(productid)}`;
+  connection.query(queryString, (error, results) => {
     if (error) {
-      console.log(error);
+      return error;
     }
     callback(null, results);
   });
 };
 
-// create
+// create review for one product
 const postReviewsByProductId = function (product, callback) {
   const queryString = 'Insert into reviews (product_id, title, text, date, author, overall_rating, value_rating, quality_rating, appearance_rating, ease_of_assembly_rating, works_as_expected_rating, recommended, helpful_count, not_helpful_count) VALUES(?, ?, ?, ?,?, ?, ?, ?,?, ?, ?, ?,?, ?)';
 
@@ -39,14 +40,13 @@ const postReviewsByProductId = function (product, callback) {
     callback(null, results);
   });
 };
-// delete-  'DELETE FROM tutorials_tbl WHERE tutorial_id = 3';
-const deleteReviewsByProductId = function (id, callback) {
+// delete one review instead all review for one product
+const deleteReviewsById = function (id, callback) {
   const queryString = `delete from reviews where id =${connection.escape(id)}`;
   connection.query(queryString, (error, results, fields) => {
     if (error) {
       throw error;
     }
-    console.log(`deleted ${results.affectedRows} rows`);
     callback(null, results[0]);
   });
 };
@@ -63,5 +63,5 @@ const incrementReviewCounts = function (req, callback) {
 module.exports.getProductDataById = getProductDataById;
 module.exports.getReviewsByProductId = getReviewsByProductId;
 module.exports.postReviewsByProductId = postReviewsByProductId;
-module.exports.deleteReviewsByProductId = deleteReviewsByProductId;
+module.exports.deleteReviewsById = deleteReviewsById;
 module.exports.incrementReviewCounts = incrementReviewCounts;
