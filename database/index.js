@@ -10,18 +10,9 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
+// not touching this
 const getProductDataById = function (req, callback) {
   connection.query('SELECT * FROM product_data WHERE id = ?', req.product_id, (error, results, fields) => {
-    if (error) {
-      return error;
-    }
-    callback(null, results);
-  });
-};
-// get reviews for one product
-const getReviewsByProductId = function (productid, callback) {
-  const queryString = `SELECT * FROM reviews WHERE product_id = ${connection.escape(productid)}`;
-  connection.query(queryString, (error, results) => {
     if (error) {
       return error;
     }
@@ -40,6 +31,30 @@ const postReviewsByProductId = function (product, callback) {
     callback(null, results);
   });
 };
+
+
+// get reviews for one product
+const getReviewsByProductId = function (productid, callback) {
+  const queryString = `SELECT * FROM reviews WHERE product_id = ${connection.escape(productid)}`;
+  connection.query(queryString, (error, results) => {
+    if (error) {
+      return error;
+    }
+    callback(null, results);
+  });
+};
+
+// update
+const incrementReviewCounts = function (req, callback) {
+  connection.query('UPDATE reviews SET ?? = ?? + 1 WHERE id = ?', [req.column, req.column, req.id], (error, results, fields) => {
+    if (error) {
+      return error;
+    }
+    callback(null, results);
+  });
+};
+
+
 // delete one review instead all review for one product
 const deleteReviewsById = function (id, callback) {
   const queryString = `delete from reviews where id =${connection.escape(id)}`;
@@ -48,15 +63,6 @@ const deleteReviewsById = function (id, callback) {
       throw error;
     }
     callback(null, results[0]);
-  });
-};
-// update
-const incrementReviewCounts = function (req, callback) {
-  connection.query('UPDATE reviews SET ?? = ?? + 1 WHERE id = ?', [req.column, req.column, req.id], (error, results, fields) => {
-    if (error) {
-      return error;
-    }
-    callback(null, results);
   });
 };
 

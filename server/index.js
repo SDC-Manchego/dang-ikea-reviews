@@ -16,17 +16,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'), {});
 });
 
-app.get('/api-reviews/:productid', (req, res) => {
-  db.getReviewsByProductId(req.params.productid, (err, results) => {
-    if (err) {
-      throw err;
-    } else {
-      res.status(200);
-      res.end(JSON.stringify(results));
-    }
-  });
-});
-
 // create
 app.post('/api-reviews', (req, res) => {
   const obj = {};
@@ -54,23 +43,9 @@ app.post('/api-reviews', (req, res) => {
     }
   });
 });
-app.delete('/api-reviews/:id', (req, res) => {
-  db.deleteReviewsById(req.params.id, (err, results) => {
-    if (err) {
-      throw err;
-    }
-    res.writeHead(200);
-    res.end(JSON.stringify(results));
-  });
-});
-app.get('*.js', (req, res, next) => {
-  req.url += '.gz';
-  res.set('Content-Encoding', 'gzip');
-  next();
-});
 
-app.get('/api-product-data', (req, res) => {
-  db.getProductDataById(req.query, (err, results) => {
+app.get('/api-reviews/:productid', (req, res) => {
+  db.getReviewsByProductId(req.params.productid, (err, results) => {
     if (err) {
       throw err;
     } else {
@@ -83,6 +58,33 @@ app.get('/api-product-data', (req, res) => {
 // update
 app.put('/api-increment', (req, res) => {
   db.incrementReviewCounts(req.body, (err, results) => {
+    if (err) {
+      throw err;
+    } else {
+      res.status(200);
+      res.end(JSON.stringify(results));
+    }
+  });
+});
+
+app.delete('/api-reviews/:id', (req, res) => {
+  db.deleteReviewsById(req.params.id, (err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.writeHead(200);
+    res.end(JSON.stringify(results));
+  });
+});
+
+app.get('*.js', (req, res, next) => {
+  req.url += '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
+app.get('/api-product-data', (req, res) => {
+  db.getProductDataById(req.query, (err, results) => {
     if (err) {
       throw err;
     } else {
