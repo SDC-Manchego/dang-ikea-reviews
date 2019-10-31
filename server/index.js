@@ -27,24 +27,24 @@ app.get('/api-reviews', (req, res) => {
     }
   });
 });
-// to-do
 
+// create
 app.post('/api-reviews', (req, res) => {
   const obj = {};
-  obj.product_id = '0';
-  obj.title = 'title';
-  obj.text = 'sentences(rando(2, 5))';
+  obj.product_id = req.body.product_id;
+  obj.title = req.body.title;
+  obj.text = req.body.text;
   obj.date = new Date(new Date() - 0).toISOString().slice(0, 10);
-  obj.author = 'first_name';
-  obj.overall_rating =	1;
-  obj.value_rating =	1;
-  obj.quality_rating =	1;
-  obj.appearance_rating =	1;
-  obj.ease_of_assembly_rating = 	1;
-  obj.works_as_expected_rating =	1;
-  obj.recommended = false;
-  obj.helpful_count = 2;
-  obj.not_helpful_count = 2;
+  obj.author = req.body.author;
+  obj.overall_rating = req.body.overall_rating;
+  obj.value_rating = req.body.value_rating;
+  obj.quality_rating = req.body.quality_rating;
+  obj.appearance_rating = req.body.appearance_rating;
+  obj.ease_of_assembly_rating = req.body.ease_of_assembly_rating;
+  obj.works_as_expected_rating = req.body.works_as_expected_rating;
+  obj.recommended = req.body.recommended;
+  obj.helpful_count = req.body.helpful_count;
+  obj.not_helpful_count = req.body.not_helpful_count;
 
   db.postReviewsByProductId(obj, (err, results) => {
     if (err) {
@@ -55,7 +55,15 @@ app.post('/api-reviews', (req, res) => {
     }
   });
 });
-
+app.delete('/api-reviews/:id', (req, res) => {
+  db.deleteReviewsByProductId(req.params.id, (err, results) => {
+    if (err) {
+      throw err;
+    }
+    res.writeHead(200);
+    res.end(JSON.stringify(results));
+  });
+});
 app.get('*.js', (req, res, next) => {
   req.url += '.gz';
   res.set('Content-Encoding', 'gzip');
@@ -73,8 +81,8 @@ app.get('/api-product-data', (req, res) => {
   });
 });
 
-app.post('/api-increment', (req, res) => {
-  // console.log(req.body);
+// update
+app.put('/api-increment', (req, res) => {
   db.incrementReviewCounts(req.body, (err, results) => {
     if (err) {
       throw err;

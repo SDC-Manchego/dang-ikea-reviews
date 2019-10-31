@@ -52,7 +52,7 @@ class SingleReview extends React.PureComponent {
       list.push(id);
     }
     $.ajax({
-      type: 'POST',
+      type: 'PUT',
       datatype: 'json',
       contentType: 'application/json',
       url: '/api-increment',
