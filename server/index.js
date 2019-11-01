@@ -59,7 +59,10 @@ app.get('/api-reviews/:productid', (req, res) => {
 app.put('/api-increment', (req, res) => {
   db.incrementReviewCounts(req.body, (err, results) => {
     if (err) {
-      throw err;
+      res.status(400).json({
+        error: err,
+        result: 'Error updating review',
+      });
     } else {
       res.status(200);
       res.end(JSON.stringify(results));

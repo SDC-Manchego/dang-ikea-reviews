@@ -1,28 +1,29 @@
-DROP TABLE reviews;
+DROP DATABASE IF EXISTS ikea_reviews;
+CREATE DATABASE ikea_reviews;
+USE ikea_reviews;
+
 CREATE TABLE reviews (
-id 	SERIAL UNIQUE NOT NULL,
-product_id INT,
+id 	INT UNIQUE NOT NULL AUTO_INCREMENT,
+product_id TINYINT,
 title 	VARCHAR(100),
 text	TEXT NOT NULL,
 date	DATE NOT NULL,
 author	VARCHAR(100) NOT NULL,
-overall_rating	INT NOT NULL,
-value_rating	INT,
-quality_rating	INT,
-appearance_rating	INT,
-ease_of_assembly_rating 	INT,
-works_as_expected_rating	INT,
+overall_rating	TINYINT NOT NULL,
+value_rating	TINYINT,
+quality_rating	TINYINT,
+appearance_rating	TINYINT,
+ease_of_assembly_rating 	TINYINT,
+works_as_expected_rating	TINYINT,
 recommended		BOOLEAN,
 helpful_count	INT DEFAULT 0,
 not_helpful_count	INT DEFAULT 0,
 reported_count	INT DEFAULT 0,
 PRIMARY KEY(id)
 );
--- /Users/silkyh13/dang-ikea-reviews/database/mySchema.sql
--- database/mySchema.sql
-DROP TABLE product_data;
+
 CREATE TABLE product_data (
-id INT UNIQUE NOT NULL,
+id TINYINT UNIQUE NOT NULL,
 description	TEXT,
 product_name VARCHAR(50),
 designer VARCHAR(50),
