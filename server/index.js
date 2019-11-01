@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-const db = require('../database/index.js');
+const db = require('../daryldatabase/index.js');
 
 const port = 3003;
 

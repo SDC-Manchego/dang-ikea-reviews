@@ -10,6 +10,7 @@
   },
   "scripts": {
     "seed": "PGUSER=root PGHOST=localhost PGPASSWORD=JackAndKat PGDATABASE=ikea PGPORT=5432  node database/databaseSeeder",
+    "darylseed": "node daryldatabase/databaseSeeder",
     "build:dev": "webpack -d --watch",
     "start": "nodemon /server/index.js",
     "test": "jest --verbose"
@@ -49,6 +50,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "faker": "^4.1.0",
     "jest": "^24.9.0",
     "nodemon": "^1.19.3",
     "supertest": "^4.0.2"

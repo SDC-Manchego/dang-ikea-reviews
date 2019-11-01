@@ -21,7 +21,7 @@ class ReviewParent extends React.PureComponent {
   }
 
   getReviewsByProductId(id, callback = () => {}) {
-    $.get('/api-reviews', { product_id: id }, (data) => {
+    $.get(`/api-reviews/${id}`, (data) => {
       this.setState({
         reviewsArray: data,
       }, callback);
@@ -52,7 +52,9 @@ class ReviewParent extends React.PureComponent {
 
   // eslint-disable-next-line class-methods-use-this
   urlProductId() {
+    console.log('window.location', window.location.href);
     const questMarkLocation = (window.location.href).indexOf('?');
+
     if (questMarkLocation === -1) {
       return '0';
     }

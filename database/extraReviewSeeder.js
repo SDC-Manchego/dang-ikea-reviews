@@ -1,14 +1,8 @@
-const mysql = require('mysql');
 const casual = require('casual');
+const { Client } = require('pg');
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'JackAndKat',
-  database: 'ikea_reviews',
-});
-
-connection.connect();
+const client = new Client();
+client.connect();
 
 const rando = function (start, stop) {
   return start + Math.round(Math.random() * (stop - start));
@@ -24,13 +18,15 @@ const productIdListMaker = function (qty) {
 
 const productIdList = productIdListMaker(100);
 
-const isRecommended = function () {
+function isRecommended() {
+  const array = [true, false];
   const test = rando(0, 2);
   if (test === 2) {
     return null;
   }
-  return test;
-};
+  return array[test];
+}
+
 
 const ReviewRecordMaker = function () {
   const obj = {};
@@ -38,13 +34,13 @@ const ReviewRecordMaker = function () {
   obj.title = casual.title;
   obj.text = casual.sentences(rando(2, 5));
   obj.date = new Date(new Date() - rando(0, 70000000000)).toISOString().slice(0, 10);
-  obj.author =	casual.first_name;
-  obj.overall_rating =	rando(1, 5);
-  obj.value_rating =	rando(1, 5);
-  obj.quality_rating =	rando(1, 5);
-  obj.appearance_rating =	rando(1, 5);
-  obj.ease_of_assembly_rating = 	rando(1, 5);
-  obj.works_as_expected_rating =	rando(1, 5);
+  obj.author = casual.first_name;
+  obj.overall_rating = rando(1, 5);
+  obj.value_rating = rando(1, 5);
+  obj.quality_rating = rando(1, 5);
+  obj.appearance_rating = rando(1, 5);
+  obj.ease_of_assembly_rating = rando(1, 5);
+  obj.works_as_expected_rating = rando(1, 5);
   obj.recommended = isRecommended();
   obj.helpful_count = rando(0, 77);
   obj.not_helpful_count = rando(0, 77);
@@ -66,21 +62,22 @@ const ProductRecordMaker = function () {
   return obj;
 };
 
-const insertProductSeeds = function (idList, recordMaker) {
-  for (let i = 0; i < idList.length; i++) {
+const insertProductSeeds = function (recordMaker, count) {
+  for (let i = 0; i < count; i++) {
     const randomizedRecord = recordMaker();
-    randomizedRecord.id = idList[i];
-    connection.query('INSERT INTO product_data SET ?', randomizedRecord, (error, results, fields) => {
+    // randomizedRecord.id = idList[i];
+    client.query('INSERT INTO product_data SET ?', randomizedRecord, (error, results, fields) => {
       if (error) { console.error(error); }
       console.log(results);
     });
   }
 };
 
-const insertReviewSeeds = function (idList, recordMaker, count) {
+const overSeedReviews = function (recordMaker, count) {
   for (let i = 0; i < count; i++) {
+    const queryString = 'Insert into reviews (product_id, title, text, date, author, overall_rating, value_rating, quality_rating, appearance_rating, ease_of_assembly_rating, works_as_expected_rating, recommended, helpful_count, not_helpful_count) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);';
     const randomizedRecord = recordMaker();
-    connection.query('INSERT INTO reviews SET ?', randomizedRecord, (error, results, fields) => {
+    client.query(queryString, (Object.values(randomizedRecord)), (error, results, fields) => {
       if (error) {
         console.error(error);
       }
@@ -89,11 +86,15 @@ const insertReviewSeeds = function (idList, recordMaker, count) {
   }
 };
 
-const seedReviews = () => { insertReviewSeeds(productIdList, ReviewRecordMaker, 70); };
-const seedProducts = () => { insertProductSeeds(productIdList, ProductRecordMaker); };
+const seedReviews = () => { insertReviewSeeds(ReviewRecordMaker, 944); };
+const seedProducts = () => { insertProductSeeds(ProductRecordMaker, 100); };
+const overSeed = () => { overSeedReviews(Overseeder, 66); };
 const seedAccordion = () => {
   seedReviews();
   seedProducts();
+  overSeed();
 };
-
-module.exports.seedReviews = seedReviews();
+module.exports.seedReviews = seedReviews;
+module.exports.seedProducts = seedProducts;
+module.exports.overSeed = overSeed;
+module.exports.seedAccordion = seedAccordion();

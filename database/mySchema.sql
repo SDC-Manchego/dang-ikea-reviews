@@ -20,17 +20,19 @@ PRIMARY KEY(id)
 );
 -- /Users/silkyh13/dang-ikea-reviews/database/mySchema.sql
 -- database/mySchema.sql
+
+
 DROP TABLE product_data;
+
 CREATE TABLE product_data (
-id INT UNIQUE NOT NULL,
+id SERIAL PRIMARY KEY,
 description	TEXT,
-product_name VARCHAR(50),
-designer VARCHAR(50),
+product_name TEXT,
+designer TEXT,
 height	INT NOT NULL,
 length	INT NOT NULL,
 width	INT NOT NULL,
 weight	INT NOT NULL,
 environment	TEXT,
-materials	TEXT,
-PRIMARY KEY(id)
+materials	TEXT
 );

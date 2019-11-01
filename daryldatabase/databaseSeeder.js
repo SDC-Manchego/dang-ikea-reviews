@@ -23,7 +23,7 @@ function productIdListMaker(qty) {
   return list;
 }
 
-const productIdList = productIdListMaker(1000000);
+const productIdList = productIdListMaker(100);
 
 function isRecommended() {
   const test = rando(0, 2);
