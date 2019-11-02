@@ -34,13 +34,13 @@ const ReviewRecordMaker = function () {
   obj.title = casual.title;
   obj.text = casual.sentences(rando(2, 5));
   obj.date = new Date(new Date() - rando(0, 70000000000)).toISOString().slice(0, 10);
-  obj.author = casual.first_name;
-  obj.overall_rating = rando(1, 5);
-  obj.value_rating = rando(1, 5);
-  obj.quality_rating = rando(1, 5);
-  obj.appearance_rating = rando(1, 5);
-  obj.ease_of_assembly_rating = rando(1, 5);
-  obj.works_as_expected_rating = rando(1, 5);
+  obj.author =	casual.first_name;
+  obj.overall_rating =	rando(1, 5);
+  obj.value_rating =	rando(1, 5);
+  obj.quality_rating =	rando(1, 5);
+  obj.appearance_rating =	rando(1, 5);
+  obj.ease_of_assembly_rating = 	rando(1, 5);
+  obj.works_as_expected_rating =	rando(1, 5);
   obj.recommended = isRecommended();
   obj.helpful_count = rando(0, 77);
   obj.not_helpful_count = rando(0, 77);
@@ -65,18 +65,8 @@ const ProductRecordMaker = function () {
 const insertProductSeeds = function (recordMaker, count) {
   for (let i = 0; i < count; i++) {
     const randomizedRecord = recordMaker();
-    // randomizedRecord.id = idList[i];
-    client.query('INSERT INTO product_data SET ?', randomizedRecord, (error, results, fields) => {
-      if (error) { console.error(error); }
-      console.log(results);
-    });
-  }
-};
-
-const overSeedReviews = function (recordMaker, count) {
-  for (let i = 0; i < count; i++) {
-    const queryString = 'Insert into reviews (product_id, title, text, date, author, overall_rating, value_rating, quality_rating, appearance_rating, ease_of_assembly_rating, works_as_expected_rating, recommended, helpful_count, not_helpful_count) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);';
-    const randomizedRecord = recordMaker();
+    const queryString = 'Insert into product_data (description, product_name, designer, height, length, width, weight, environment, materials) values ($1, $2, $3, $4, $5, $6, $7, $8, $9);';
+    // randomizedRecord.id = i;
     client.query(queryString, (Object.values(randomizedRecord)), (error, results, fields) => {
       if (error) {
         console.error(error);
@@ -86,15 +76,23 @@ const overSeedReviews = function (recordMaker, count) {
   }
 };
 
-const seedReviews = () => { insertReviewSeeds(ReviewRecordMaker, 944); };
+const insertReviewSeeds = function (recordMaker, count) {
+  for (let i = 0; i < count; i++) {
+    const queryString = 'Insert into reviews (product_id, title, text, date, author, overall_rating, value_rating, quality_rating, appearance_rating, ease_of_assembly_rating, works_as_expected_rating, recommended, helpful_count, not_helpful_count) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);';
+    const randomizedRecord = recordMaker();// obj
+    client.query(queryString, (Object.values(randomizedRecord)), (error, results, fields) => {
+      if (error) {
+        console.error(error);
+      }
+      console.log(results);
+    });
+  }
+};
+const seedReviews = () => { insertReviewSeeds(ReviewRecordMaker, 70); };
 const seedProducts = () => { insertProductSeeds(ProductRecordMaker, 100); };
-const overSeed = () => { overSeedReviews(Overseeder, 66); };
 const seedAccordion = () => {
   seedReviews();
   seedProducts();
-  overSeed();
 };
-module.exports.seedReviews = seedReviews;
-module.exports.seedProducts = seedProducts;
-module.exports.overSeed = overSeed;
-module.exports.seedAccordion = seedAccordion();
+
+module.exports.seedReviews = seedReviews();
