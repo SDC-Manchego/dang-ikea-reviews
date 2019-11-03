@@ -2,15 +2,12 @@ const casual = require('casual');
 // const { Client } = require('pg');
 
 const productCount = 1000;
-const reviewCount = 15000000;
+const reviewCount = 150000;
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
 
 const writer = csvWriter({
   separator: ';',
-  newline: '\n',
-  headers: undefined,
-  sendHeaders: true,
 });
 
 function rando(start, stop) {
@@ -43,8 +40,8 @@ function ReviewRecordMaker() {
   return obj;
 }
 
-let i = 15000000;
-writer.pipe(fs.createWriteStream('out.csv'));
+let i = 1000;
+writer.pipe(fs.createWriteStream('testingout.csv'));
 
 function writeReviews() {
   let ok = true;
