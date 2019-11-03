@@ -10,6 +10,8 @@
   },
   "scripts": {
     "seed": "PGUSER=root PGHOST=localhost PGPASSWORD=JackAndKat PGDATABASE=ikea PGPORT=5432  node database/databaseSeeder",
+    "seeder": "node database/generateReviews",
+    "copy": "PGUSER=root PGHOST=localhost PGPASSWORD=JackAndKat PGDATABASE=ikea PGPORT=5432 node database/copy",
     "darylseed": "node daryldatabase/databaseSeeder",
     "build:dev": "webpack -d --watch",
     "start": "nodemon /server/index.js",
@@ -42,6 +44,7 @@
     "babel-preset-minify": "^0.5.1",
     "casual": "^1.6.2",
     "compression-webpack-plugin": "^3.0.0",
+    "csv-write-stream": "^2.0.0",
     "csv-writer": "^1.5.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",

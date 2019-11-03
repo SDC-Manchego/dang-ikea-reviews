@@ -18,6 +18,7 @@ not_helpful_count	INT DEFAULT 0,
 reported_count	INT DEFAULT 0,
 PRIMARY KEY(id)
 );
+
 -- /Users/silkyh13/dang-ikea-reviews/database/mySchema.sql
 -- database/mySchema.sql
 

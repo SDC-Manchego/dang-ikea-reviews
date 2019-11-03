@@ -120,9 +120,9 @@ const overSeedReviews = function (recordMaker, count) {
   }
 };
 
-const seedReviews = () => { insertReviewSeeds(ReviewRecordMaker, 944); };
-const seedProducts = () => { insertProductSeeds(ProductRecordMaker, 100); };
-const overSeed = () => { overSeedReviews(Overseeder, 66); };
+const seedReviews = () => { insertReviewSeeds(ReviewRecordMaker, 1); };
+const seedProducts = () => { insertProductSeeds(ProductRecordMaker, 1); };
+const overSeed = () => { overSeedReviews(Overseeder, 1); };
 const seedAccordion = () => {
   seedReviews();
   seedProducts();

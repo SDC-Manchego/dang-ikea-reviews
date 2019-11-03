@@ -88,8 +88,8 @@ const insertReviewSeeds = function (recordMaker, count) {
     });
   }
 };
-const seedReviews = () => { insertReviewSeeds(ReviewRecordMaker, 70); };
-const seedProducts = () => { insertProductSeeds(ProductRecordMaker, 100); };
+const seedReviews = () => { insertReviewSeeds(ReviewRecordMaker, 1); };
+const seedProducts = () => { insertProductSeeds(ProductRecordMaker, 1); };
 const seedAccordion = () => {
   seedReviews();
   seedProducts();
