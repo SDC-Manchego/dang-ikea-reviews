@@ -10,7 +10,8 @@
   },
   "scripts": {
     "seed": "PGUSER=root PGHOST=localhost PGPASSWORD=JackAndKat PGDATABASE=ikea PGPORT=5432  node database/databaseSeeder",
-    "seeder": "node database/generateReviews",
+    "seedReviews": "node database/generateReviews",
+    "seedProducts": "node database/generateProducts",
     "copy": "PGUSER=root PGHOST=localhost PGPASSWORD=JackAndKat PGDATABASE=ikea PGPORT=5432 node database/copy",
     "darylseed": "node daryldatabase/databaseSeeder",
     "build:dev": "webpack -d --watch",

@@ -1,3 +1,4 @@
 node_modules
 public/reviewBundle.js
-out.csv
+products.csv
+reviews.csv
