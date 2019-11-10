@@ -1,7 +1,7 @@
 const casual = require('casual');
 // const { Client } = require('pg');
 
-const productCount = 1000;
+const productCount = 10000000;
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
 
@@ -25,6 +25,7 @@ function isRecommended() {
 
 function ReviewRecordMaker() {
   const obj = {};
+
   obj.product_id = rando(0, productCount);//
   obj.title = casual.title;
   obj.text = casual.sentences(rando(2, 10));
@@ -42,7 +43,7 @@ function ReviewRecordMaker() {
   return obj;
 }
 
-let i = 10000000;
+let i = 120000000;
 writer.pipe(fs.createWriteStream(`${__dirname}/reviews.csv`));
 
 function writeReviews() {
@@ -103,7 +104,7 @@ writeReviews();
 //   const client = new Client();
 //   client.connect();
 
-//   for (let i = 0; i < reviewCount; i += 1) {
+//   for (let i = 0; i < reviewCount/2; i += 1) {
 //     const queryString = 'insert into reviews (product_id, title, text, date, author, overall_rating, value_rating, quality_rating, appearance_rating, ease_of_assembly_rating, works_as_expected_rating, recommended, helpful_count, not_helpful_count) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);';
 //     const randomizedRecord = ReviewRecordMaker();// obj
 //     client.query(queryString, (Object.values(randomizedRecord))).then().catch((err) => { console.log(err); });
