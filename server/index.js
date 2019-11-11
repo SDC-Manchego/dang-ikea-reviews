@@ -82,8 +82,8 @@ app.get('*.js', (req, res, next) => {
 });
 
 
-app.get('/api-product-data/:id', (req, res) => {
-  db.getProductDataById(req.params.id, (results) => {
+app.get('/api-product-data/', (req, res) => {
+  db.getProductDataById(req.query.id, (results) => {
     res.send(results);
   });
 });
