@@ -1,55 +1,58 @@
-const mysql = require('mysql');
-const casual = require('casual');
+const { Pool, Client } = require('pg');
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'JackAndKat',
-  database: 'ikea_reviews',
+const connectionString = 'postgres://root:JackAndKat@localhost:5432/ikea';
+const pool = new Pool({
+  connectionString,
 });
 
-connection.connect();
+const client = new Client({
+  connectionString,
+});
+client.connect();
 
 // not touching this
-const getProductDataById = function (req, callback) {
-  connection.query('SELECT * FROM product_data WHERE id = ?', req.product_id, (error, results, fields) => {
-    try {
-      callback(null, results);
-    } catch (e) {
-      console.error(e);
+
+const getProductDataById = (id, callback) => {
+  const ProductDataById = parseInt(id, 10);
+  client.query('SELECT * FROM product_data WHERE id = $1;', [ProductDataById], (error, results) => {
+    if (error) {
+      throw error;
     }
+
+    callback(results.rows);
   });
 };
 
 // create review for one product
-const postReviewsByProductId = function (product, callback) {
-  const queryString = 'Insert into reviews (product_id, title, text, date, author, overall_rating, value_rating, quality_rating, appearance_rating, ease_of_assembly_rating, works_as_expected_rating, recommended, helpful_count, not_helpful_count) VALUES(?, ?, ?, ?,?, ?, ?, ?,?, ?, ?, ?,?, ?)';
 
-  connection.query(queryString, (Object.values(product)), (error, results) => {
-    try {
-      callback(null, results);
-    } catch (e) {
-      console.error(e);
+const postReviewsByProductId = function (product, callback) {
+  const queryString = 'INSERT INTO reviews(product_id,title,text,date,author,overall_rating,value_rating,quality_rating,appearance_rating,ease_of_assembly_rating,works_as_expected_rating,recommended,helpful_count,not_helpful_count) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *';
+  client.query(queryString, (Object.values(product)), (err, res) => {
+    if (err) {
+      console.log(err.stack);
+    } else {
+      // console.log(res.rows[0]);
+      callback(null, res.rows[0]);
     }
   });
 };
-
 
 // get reviews for one product
-const getReviewsByProductId = function (productid, callback) {
-  const queryString = `SELECT * FROM reviews WHERE product_id = ${productid}`;
-  connection.query(queryString, (error, results) => {
-    try {
-      callback(null, results);
-    } catch (e) {
-      console.error(e);
+
+const getReviewsByProductId = (productid, callback) => {
+  const id = parseInt(productid, 10);
+  client.query('select * from reviews where product_id = $1;', [id], (error, results) => {
+    if (error) {
+      throw error;
     }
+    callback(results.rows);
   });
 };
+
 
 // update
 const incrementReviewCounts = function (req, callback) {
-  connection.query('UPDATE reviews SET ?? = ?? + 1 WHERE id = ?', [req.column, req.column, req.id], (error, results, fields) => {
+  client.query('UPDATE reviews SET ?? = ?? + 1 WHERE id = ?', [req.column, req.column, req.id], (error, results, fields) => {
     try {
       callback(null, results);
     } catch (e) {
@@ -62,7 +65,7 @@ const incrementReviewCounts = function (req, callback) {
 // delete one review instead all review for one product
 const deleteReviewsById = function (id, callback) {
   const queryString = `delete from reviews where id =${id}`;
-  connection.query(queryString, (error, results) => {
+  client.query(queryString, (error, results) => {
     try {
       callback(null, results[0]);
     } catch (e) {

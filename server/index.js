@@ -45,13 +45,8 @@ app.post('/api-reviews', (req, res) => {
 });
 
 app.get('/api-reviews/:productid', (req, res) => {
-  db.getReviewsByProductId(req.params.productid, (err, results) => {
-    if (err) {
-      throw err;
-    } else {
-      res.status(200);
-      res.end(JSON.stringify(results));
-    }
+  db.getReviewsByProductId(req.params.productid, (results) => {
+    res.send(results);
   });
 });
 
@@ -59,7 +54,10 @@ app.get('/api-reviews/:productid', (req, res) => {
 app.put('/api-increment', (req, res) => {
   db.incrementReviewCounts(req.body, (err, results) => {
     if (err) {
-      throw err;
+      res.status(400).json({
+        error: err,
+        result: 'Error updating review',
+      });
     } else {
       res.status(200);
       res.end(JSON.stringify(results));
@@ -83,14 +81,10 @@ app.get('*.js', (req, res, next) => {
   next();
 });
 
-app.get('/api-product-data', (req, res) => {
-  db.getProductDataById(req.query, (err, results) => {
-    if (err) {
-      throw err;
-    } else {
-      res.status(200);
-      res.end(JSON.stringify(results));
-    }
+
+app.get('/api-product-data/', (req, res) => {
+  db.getProductDataById(req.query.id, (results) => {
+    res.send(results);
   });
 });
 
