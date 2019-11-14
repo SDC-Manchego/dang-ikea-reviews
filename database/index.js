@@ -1,12 +1,14 @@
-const { Pool, Client } = require('pg');
+require('dotenv').config();
 
-const connectionString = 'postgres://root:JackAndKat@localhost:5432/ikea';
-const pool = new Pool({
-  connectionString,
-});
+const { Client } = require('pg');
+
 
 const client = new Client({
-  connectionString,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASS,
+  port: process.env.DB_PORT,
 });
 client.connect();
 
