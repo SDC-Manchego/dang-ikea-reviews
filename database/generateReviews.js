@@ -1,7 +1,7 @@
 const casual = require('casual');
 // const { Client } = require('pg');
 
-const productCount = 10000000;
+const productCount = 1000000;
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
 
@@ -43,7 +43,7 @@ function ReviewRecordMaker() {
   return obj;
 }
 
-let i = 120000000;
+let i = 10000000;
 writer.pipe(fs.createWriteStream(`${__dirname}/reviews.csv`));
 
 function writeReviews() {

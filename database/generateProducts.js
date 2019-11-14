@@ -31,7 +31,7 @@ function ProductRecordMaker() {
   return obj;
 }
 
-let i = 10000000;
+let i = 1000000;
 writer.pipe(fs.createWriteStream(`${__dirname}/products.csv`));
 
 
