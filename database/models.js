@@ -45,3 +45,5 @@ module.exports = {
 //   }
 //   console.log(results);
 // });
+
+// select title,text,date,author,overall_rating,value_rating,quality_rating,appearance_rating,ease_of_assembly_rating,works_as_expected_rating,recommended,helpful_count,not_helpful_count
