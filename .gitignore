@@ -2,3 +2,4 @@ node_modules
 public/reviewBundle.js
 products.csv
 reviews.csv
+.env
